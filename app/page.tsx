@@ -19,7 +19,7 @@ export default function Home() {
             Barra <span className="italic text-primary font-light">Infiltrada</span>
           </h1>
           <p className="font-body-lg text-on-surface-variant max-w-[320px] mx-auto mb-12">
-            Un ritual itinerante donde el grano, el agua y el tiempo se entrelazan en la perfección efímera.
+            Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente.
           </p>
           <div className="flex flex-col gap-4 max-w-[280px] mx-auto">
             <Link href="/rating" className="w-full">
@@ -27,9 +27,11 @@ export default function Home() {
                 ☕ Calificar el Café de Hoy
               </button>
             </Link>
-            <button className="glass-card text-primary border border-primary/20 font-label-caps text-label-caps tracking-widest py-5 px-8 rounded-lg uppercase transition-all active:scale-95">
-              Explorar Cafés
-            </button>
+            <Link href="/explorar" className="w-full">
+              <button className="w-full glass-card text-primary border border-primary/20 font-label-caps text-label-caps tracking-widest py-5 px-8 rounded-lg uppercase transition-all active:scale-95">
+                Explorar Cafés
+              </button>
+            </Link>
           </div>
         </section>
 
@@ -167,7 +169,7 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 p-8 w-full">
                 <div className="inline-block bg-primary text-on-primary font-label-caps text-[9px] px-2 py-0.5 rounded uppercase mb-3">Edición 04</div>
                 <h3 className="font-headline-sm text-white text-[24px]">Galería Objeto</h3>
-                <p className="font-body-md text-on-surface-variant text-[14px] mt-2 italic">Donde el café se vuelve materia escultórica.</p>
+                <p className="font-body-md text-on-surface-variant text-[14px] mt-2 italic">Arte contemporáneo y café de especialidad.</p>
                 <div className="flex gap-4 mt-4 opacity-70">
                   <div className="flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">groups</span>
@@ -193,7 +195,7 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 p-8 w-full">
                 <div className="inline-block bg-primary text-on-primary font-label-caps text-[9px] px-2 py-0.5 rounded uppercase mb-3">Edición 03</div>
                 <h3 className="font-headline-sm text-white text-[24px]">Taller Industrial</h3>
-                <p className="font-body-md text-on-surface-variant text-[14px] mt-2 italic">La ingeniería del sabor en crudo.</p>
+                <p className="font-body-md text-on-surface-variant text-[14px] mt-2 italic">Espacio industrial, café de altura.</p>
                 <div className="flex gap-4 mt-4 opacity-70">
                   <div className="flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">groups</span>
@@ -216,7 +218,7 @@ export default function Home() {
             <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-secondary/10 blur-[80px]"></div>
             <h2 className="font-headline-sm text-[32px] mb-4">Tu veredicto importa</h2>
             <p className="font-body-md text-on-surface-variant mb-10 max-w-[280px] mx-auto">
-              La infiltración solo está completa cuando recibimos tu percepción sensorial. Ayúdanos a mapear el sabor de hoy.
+              Contanos qué sentiste. Tus notas ayudan a construir la memoria de cada edición.
             </p>
             <Link href="/rating" className="w-full">
               <button className="w-full bg-primary text-on-primary font-label-caps text-label-caps tracking-widest py-6 px-8 rounded-lg uppercase font-bold transition-all active:scale-95 flex items-center justify-center gap-3">
