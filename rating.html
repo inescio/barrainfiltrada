@@ -1,325 +1,706 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calificar Café – Barra Infiltrada</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&amp;family=DM+Sans:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        body {
-            background: radial-gradient(circle at top right, #2c1a0e, #16130d 60%);
-            min-height: 100vh;
-        }
-        .glass-card {
-            background: rgba(44, 26, 14, 0.45);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 168, 83, 0.2);
-            -webkit-backdrop-filter: blur(20px);
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "on-tertiary": "#023061",
-                      "on-error-container": "#ffdad6",
-                      "on-tertiary-fixed": "#001b3d",
-                      "surface-tint": "#eec068",
-                      "primary-container": "#d4a853",
-                      "on-error": "#690005",
-                      "surface": "#16130d",
-                      "tertiary-fixed": "#d6e3ff",
-                      "secondary-container": "#584325",
-                      "error-container": "#93000a",
-                      "on-secondary": "#3f2d11",
-                      "surface-container-high": "#2e2923",
-                      "secondary": "#e0c29a",
-                      "inverse-surface": "#eae1d7",
-                      "on-secondary-fixed-variant": "#584325",
-                      "primary-fixed-dim": "#eec068",
-                      "on-surface": "#eae1d7",
-                      "error": "#ffb4ab",
-                      "surface-container-low": "#1f1b15",
-                      "on-primary-container": "#573d00",
-                      "surface-dim": "#16130d",
-                      "primary": "#f2c36b",
-                      "on-background": "#eae1d7",
-                      "background": "#16130d",
-                      "inverse-primary": "#7b5804",
-                      "on-secondary-fixed": "#281901",
-                      "on-secondary-container": "#cdb18a",
-                      "tertiary": "#afcbff",
-                      "outline-variant": "#4e4637",
-                      "surface-container-lowest": "#110e08",
-                      "secondary-fixed": "#fddeb5",
-                      "on-primary-fixed-variant": "#5d4200",
-                      "surface-container": "#231f19",
-                      "on-tertiary-container": "#1d4274",
-                      "outline": "#9b8f7e",
-                      "surface-container-highest": "#39342d",
-                      "on-primary": "#412d00",
-                      "surface-variant": "#39342d",
-                      "on-tertiary-fixed-variant": "#234779",
-                      "surface-bright": "#3d3831",
-                      "tertiary-container": "#8fb0e9",
-                      "inverse-on-surface": "#343029",
-                      "secondary-fixed-dim": "#e0c29a",
-                      "on-primary-fixed": "#271900",
-                      "primary-fixed": "#ffdea6",
-                      "tertiary-fixed-dim": "#a8c8ff",
-                      "on-surface-variant": "#d2c5b2"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "unit": "8px",
-                      "margin-desktop": "64px",
-                      "container-max": "1280px",
-                      "section-gap": "120px",
-                      "margin-mobile": "20px",
-                      "gutter": "24px"
-              },
-              "fontFamily": {
-                      "display-lg": ["Cormorant Garamond"],
-                      "label-caps": ["DM Sans"],
-                      "headline-sm": ["Cormorant Garamond"],
-                      "display-md": ["Cormorant Garamond"],
-                      "body-lg": ["DM Sans"],
-                      "body-md": ["DM Sans"]
-              },
-              "fontSize": {
-                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300"}],
-                      "label-caps": ["11px", {"lineHeight": "1.0", "letterSpacing": "0.2em", "fontWeight": "400"}],
-                      "headline-sm": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
-                      "display-md": ["48px", {"lineHeight": "1.2", "fontWeight": "300"}],
-                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "300"}],
-                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
-              }
-            },
-          },
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-tertiary": "#023061","on-error-container": "#ffdad6","on-tertiary-fixed": "#001b3d",
+          "surface-tint": "#eec068","primary-container": "#d4a853","on-error": "#690005",
+          "surface": "#16130d","tertiary-fixed": "#d6e3ff","secondary-container": "#584325",
+          "error-container": "#93000a","on-secondary": "#3f2d11","surface-container-high": "#2e2923",
+          "secondary": "#e0c29a","inverse-surface": "#eae1d7","on-secondary-fixed-variant": "#584325",
+          "primary-fixed-dim": "#eec068","on-surface": "#eae1d7","error": "#ffb4ab",
+          "surface-container-low": "#1f1b15","on-primary-container": "#573d00","surface-dim": "#16130d",
+          "primary": "#f2c36b","on-background": "#eae1d7","background": "#16130d",
+          "inverse-primary": "#7b5804","on-secondary-fixed": "#281901","on-secondary-container": "#cdb18a",
+          "tertiary": "#afcbff","outline-variant": "#4e4637","surface-container-lowest": "#110e08",
+          "secondary-fixed": "#fddeb5","on-primary-fixed-variant": "#5d4200","surface-container": "#231f19",
+          "on-tertiary-container": "#1d4274","outline": "#9b8f7e","surface-container-highest": "#39342d",
+          "on-primary": "#412d00","surface-variant": "#39342d","on-tertiary-fixed-variant": "#234779",
+          "surface-bright": "#3d3831","tertiary-container": "#8fb0e9","inverse-on-surface": "#343029",
+          "secondary-fixed-dim": "#e0c29a","on-primary-fixed": "#271900","primary-fixed": "#ffdea6",
+          "tertiary-fixed-dim": "#a8c8ff","on-surface-variant": "#d2c5b2"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        spacing: {
+          unit: "8px","margin-desktop": "64px","container-max": "1280px",
+          "section-gap": "120px","margin-mobile": "20px","gutter": "24px"
+        },
+        fontFamily: {
+          "display-lg": ["Cormorant Garamond"],"label-caps": ["DM Sans"],
+          "headline-sm": ["Cormorant Garamond"],"display-md": ["Cormorant Garamond"],
+          "body-lg": ["DM Sans"],"body-md": ["DM Sans"]
+        },
+        fontSize: {
+          "display-lg": ["64px",{lineHeight:"1.1",letterSpacing:"-0.02em",fontWeight:"300"}],
+          "label-caps": ["11px",{lineHeight:"1.0",letterSpacing:"0.2em",fontWeight:"400"}],
+          "headline-sm": ["32px",{lineHeight:"1.3",fontWeight:"400"}],
+          "display-md": ["48px",{lineHeight:"1.2",fontWeight:"300"}],
+          "body-lg": ["18px",{lineHeight:"1.6",fontWeight:"300"}],
+          "body-md": ["16px",{lineHeight:"1.6",fontWeight:"400"}]
         }
-      </script>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
+      }
     }
-  </style>
-  </head>
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  body { background: radial-gradient(circle at top right, #2c1a0e, #16130d 60%); min-height: max(884px, 100dvh); }
+  .glass-card { background: rgba(44,26,14,0.45); backdrop-filter: blur(20px); border: 1px solid rgba(212,168,83,0.2); -webkit-backdrop-filter: blur(20px); }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Varietal card selection */
+  .varietal-card { cursor: pointer; transition: all 0.25s ease; }
+  .varietal-card:hover { transform: translateY(-2px); border-color: rgba(242,195,107,0.5) !important; }
+  .varietal-card.selected { border-color: rgba(242,195,107,0.8) !important; box-shadow: 0 0 20px rgba(242,195,107,0.15); opacity: 1 !important; }
+  .varietal-card.unselected { opacity: 0.55; }
+
+  /* Bottom sheet */
+  #detail-sheet { transition: transform 0.4s cubic-bezier(0.32,0.72,0,1); transform: translateY(100%); }
+  #detail-sheet.open { transform: translateY(0); }
+  #sheet-backdrop { transition: opacity 0.3s ease; }
+
+  /* Star rating */
+  .star-btn { cursor: pointer; transition: transform 0.15s ease; }
+  .star-btn:hover { transform: scale(1.15); }
+
+  /* Attribute sliders */
+  .attr-row { cursor: pointer; }
+  .attr-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(242,195,107,0.4); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s; font-size: 11px; font-family: 'DM Sans', sans-serif; color: rgba(210,197,178,0.7); flex-shrink: 0; }
+  .attr-dot.filled { background: #f2c36b; border-color: #f2c36b; color: #412d00; font-weight: 700; }
+  .attr-dot:hover { border-color: #f2c36b; }
+
+  /* Success toast */
+  #toast { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+</style>
+</head>
 <body class="bg-background text-on-background font-body-md overflow-x-hidden">
+
 <!-- Top Navigation Bar -->
 <nav class="fixed top-0 w-full z-50 bg-surface/45 backdrop-blur-[20px] border-b border-primary/20">
-<div class="flex justify-between items-center h-20 px-6 max-w-container-max mx-auto">
-<a href="/" class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Barra Infiltrada</a>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-primary scale-100 hover:scale-[1.02] active:scale-95 transition-all">dark_mode</span>
-<span class="material-symbols-outlined text-on-surface">menu</span>
-</div>
-</div>
+  <div class="flex justify-between items-center h-20 px-6 max-w-container-max mx-auto">
+    <a href="/" class="font-headline-sm text-[22px] text-on-surface tracking-tight" style="font-family:'Cormorant Garamond'">Barra Infiltrada</a>
+    <div class="flex items-center gap-4">
+      <span class="material-symbols-outlined text-on-surface-variant text-[22px]">menu</span>
+    </div>
+  </div>
 </nav>
-<main class="pt-24 pb-section-gap px-6 max-w-container-max mx-auto space-y-12">
-<!-- Header Section -->
-<header class="text-center space-y-2">
-<p class="font-label-caps text-label-caps text-primary uppercase tracking-[0.3em]">Experiencia Sensorial</p>
-<h1 class="font-display-md text-display-md text-on-surface">Barra del Día</h1>
-<div class="flex justify-center items-center gap-2 py-2">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-<span class="font-label-caps text-label-caps text-on-surface-variant">12 personas calificando en vivo</span>
-</div>
-</header>
-<!-- Varietal Selection Section (Horizontal Scroll) -->
-<section class="space-y-6">
-<div class="flex justify-between items-end">
-<h2 class="font-headline-sm text-headline-sm text-on-surface">Selecciona tu Varietal</h2>
-<span class="font-label-caps text-label-caps text-primary">VER TODO</span>
-</div>
-<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6">
-<!-- Varietal Card 1 -->
-<div class="min-w-[280px] glass-card rounded-xl p-4 space-y-4 border-primary/40">
-<div class="aspect-[4/3] rounded-lg overflow-hidden relative">
-<img class="w-full h-full object-cover grayscale-[0.3]" data-alt="A macro photograph of premium Guji Sidamo G1 coffee beans displayed in a shallow ceramic dish. The lighting is low and cinematic, highlighting the silky texture and deep chocolate tones of the medium roast. The scene is set in a dimly lit, high-end cafe environment with warm honey-colored light glints reflecting off the coffee surface, maintaining a sophisticated glassmorphism aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6kFCJ_VSJEORCJwGn_qxIgUJ-cO7Bw4-n8IVcHAG5iTpm8u0_jDhe_oOebw6D0NEloQ54w6jJV_x2DAmPg27oU-J0FW15KdRyalIOp_L9gEVci8K_o4DIbmGfhKUbc3pdq7wwpfnzx7LXUyYZ1hjcdGCe9jX6RriGll2X3ndd_9lJUNw_QSgd0ml28J4F1i-a0aR53-KHG-OYNr3KgYx_dz0Z1SypljXbrg1NTKjzmDk-YxDH69bS5JMPCSQUgMdCxJ9lV9jI7VHK"/>
-<div class="absolute top-2 right-2 bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">ACTIVO</div>
-</div>
-<div>
-<h3 class="font-headline-sm text-[24px] text-on-surface">Guji Sidamo G1</h3>
-<p class="font-body-md text-on-surface-variant text-sm">Etiopía • Lavado • Notas Cítricas</p>
-</div>
-</div>
-<!-- Varietal Card 2 -->
-<div class="min-w-[280px] glass-card rounded-xl p-4 space-y-4 opacity-70">
-<div class="aspect-[4/3] rounded-lg overflow-hidden relative">
-<img class="w-full h-full object-cover grayscale-[0.3]" data-alt="Close-up of specialty Huila Geisha coffee beans being carefully sorted by hand on a dark wooden surface. The atmosphere is quiet and artisanal, with soft bokeh highlighting the elegant shape of the beans. The color palette is composed of rich browns, deep shadows, and subtle honey-toned highlights, reflecting a professional and atmospheric coffee ritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqZdMom4JQKxg9s0-R9VfCfc77bgoB1u9whpTGTGHfL3X7-G0x0gf-prlXT3jd5Xe80J9AS0K5a1U6lYZh35dFY29-nHTiQM0OYITxVdKppDWohNfUkCgkkXFVX3HgAxQvKnU68Wbugtwr7WV6_0m6Lry1pYuZDaT2TeN-uZ15yT36iEo0uCDf3xgRFcYoNhOPWNzbf7wle5HMA7oRCUTI06215qZCN4_YUoMvwnPNBNiOLrAzDhWqUt-pXHISTlsjkYf2iTbS_SpP"/>
-</div>
-<div>
-<h3 class="font-headline-sm text-[24px] text-on-surface">Huila Geisha</h3>
-<p class="font-body-md text-on-surface-variant text-sm">Colombia • Natural • Jazmín</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Descriptor de Perfil (Integrated Desktop Sidebar) -->
-<section class="glass-card rounded-xl p-8 space-y-6">
-<h3 class="font-headline-sm text-[20px] text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">analytics</span>
-                Descriptor de Perfil
-            </h3>
-<div class="grid grid-cols-2 gap-4">
-<div class="space-y-1">
-<span class="font-label-caps text-label-caps text-on-surface-variant">TUESTE</span>
-<p class="font-body-md text-primary">Medio-Ligero</p>
-</div>
-<div class="space-y-1">
-<span class="font-label-caps text-label-caps text-on-surface-variant">PROCESO</span>
-<p class="font-body-md text-primary">Lavado Extendido</p>
-</div>
-</div>
-<div class="pt-4 border-t border-primary/10">
-<p class="font-body-md text-on-surface-variant italic">"Una taza compleja que evoluciona desde notas de té negro hacia una dulzura de durazno maduro."</p>
-</div>
-</section>
-<!-- Rating Form -->
-<section class="space-y-8">
-<div class="space-y-2">
-<h2 class="font-display-md text-[32px] text-on-surface">Califica tu Ritual</h2>
-<p class="font-body-md text-on-surface-variant">La precisión en tu percepción define la excelencia del proceso.</p>
-</div>
-<form class="space-y-10">
-<!-- General Rating -->
-<div class="space-y-4">
-<label class="font-label-caps text-label-caps text-primary">IMPRESIÓN GENERAL</label>
-<div class="flex gap-2">
-<span class="material-symbols-outlined text-[40px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[40px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[40px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[40px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[40px] text-outline">star</span>
-</div>
-</div>
-<!-- Sub-category Sliders / Ratings -->
-<div class="space-y-8 glass-card rounded-xl p-6">
-<h4 class="font-label-caps text-label-caps text-on-surface-variant border-b border-primary/10 pb-4">ATRIBUTOS ESPECÍFICOS</h4>
-<!-- Category Row -->
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-body-md text-on-surface">Aroma</span>
-<span class="text-primary font-bold">4/5</span>
-</div>
-<div class="h-[2px] w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[80%]"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-body-md text-on-surface">Acidez</span>
-<span class="text-primary font-bold">3/5</span>
-</div>
-<div class="h-[2px] w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[60%]"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-body-md text-on-surface">Dulzura</span>
-<span class="text-primary font-bold">5/5</span>
-</div>
-<div class="h-[2px] w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[100%]"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-body-md text-on-surface">Cuerpo</span>
-<span class="text-primary font-bold">4/5</span>
-</div>
-<div class="h-[2px] w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[80%]"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-body-md text-on-surface">Retrogusto</span>
-<span class="text-primary font-bold">4/5</span>
-</div>
-<div class="h-[2px] w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[80%]"></div>
-</div>
-</div>
-</div>
-<!-- Personal Tasting Notes -->
-<div class="space-y-4">
-<label class="font-label-caps text-label-caps text-primary">NOTAS DE CATA PERSONALES</label>
-<textarea class="w-full bg-surface/30 border-b border-primary/30 focus:border-primary focus:ring-0 text-on-surface placeholder:text-on-surface-variant/50 p-4 font-body-md h-32 rounded-lg resize-none" placeholder="Describe la evolución de la temperatura y los descriptores detectados..."></textarea>
-</div>
-<!-- Submit Button -->
-<button class="w-full bg-primary text-on-primary font-label-caps text-[14px] tracking-[0.2em] py-5 rounded-lg font-bold shadow-lg shadow-primary/10 active:scale-95 transition-transform">
-                    ENVIAR MI RITUAL
-                </button>
-</form>
-</section>
-<!-- Origin Capsule (Integrated Desktop Sidebar) -->
-<section class="relative h-[240px] rounded-xl overflow-hidden glass-card group">
-<img class="w-full h-full object-cover absolute inset-0 opacity-40 grayscale-[0.2]" data-alt="An atmospheric landscape of misty coffee plantations in the high altitudes of Ethiopia during dawn. The soft, diffuse light filters through the clouds, creating a serene and mystical environment. The foreground shows dew-covered coffee cherries on the branches, while the background consists of rolling green hills lost in the morning fog, capturing the origin's essence in a high-end editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-<div class="relative z-10 p-6 flex flex-col justify-end h-full">
-<span class="font-label-caps text-[10px] text-primary tracking-widest">CÁPSULA DE ORIGEN</span>
-<h4 class="font-display-md text-[28px] text-on-surface">Sidama, Ethiopia</h4>
-<p class="font-body-md text-sm text-on-surface-variant line-clamp-2">Explora la historia de la familia Bekele y su compromiso con la biodiversidad en la región de Guji.</p>
-</div>
-</section>
+
+<main class="pt-24 pb-32 px-6 max-w-container-max mx-auto space-y-10">
+
+  <!-- Header -->
+  <header class="text-center space-y-2">
+    <p class="font-label-caps text-label-caps text-primary uppercase tracking-[0.3em]">Experiencia Sensorial</p>
+    <h1 class="text-on-surface" style="font-family:'Cormorant Garamond';font-size:44px;line-height:1.1;font-weight:300">Barra del Día</h1>
+    <div class="flex justify-center items-center gap-2 py-1">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      <span class="font-label-caps text-label-caps text-on-surface-variant">12 personas calificando en vivo</span>
+    </div>
+  </header>
+
+  <!-- Varietal Selection -->
+  <section class="space-y-4">
+    <div class="flex justify-between items-end">
+      <h2 class="font-headline-sm text-[22px] text-on-surface">Selecciona tu Varietal</h2>
+      <span class="font-label-caps text-label-caps text-primary cursor-pointer">VER TODO</span>
+    </div>
+    <p class="font-body-md text-on-surface-variant text-sm -mt-2">Tocá una tarjeta para ver más información</p>
+    <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6">
+
+      <!-- Card 1: Guji Sidamo -->
+      <div class="varietal-card selected min-w-[280px] glass-card rounded-xl p-4 space-y-3"
+           data-id="guji"
+           onclick="selectVarietal('guji')">
+        <div class="aspect-[4/3] rounded-lg overflow-hidden relative">
+          <img class="w-full h-full object-cover grayscale-[0.2]"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6kFCJ_VSJEORCJwGn_qxIgUJ-cO7Bw4-n8IVcHAG5iTpm8u0_jDhe_oOebw6D0NEloQ54w6jJV_x2DAmPg27oU-J0FW15KdRyalIOp_L9gEVci8K_o4DIbmGfhKUbc3pdq7wwpfnzx7LXUyYZ1hjcdGCe9jX6RriGll2X3ndd_9lJUNw_QSgd0ml28J4F1i-a0aR53-KHG-OYNr3KgYx_dz0Z1SypljXbrg1NTKjzmDk-YxDH69bS5JMPCSQUgMdCxJ9lV9jI7VHK"
+               alt="Guji Sidamo G1 coffee beans"/>
+          <div class="absolute top-2 right-2 bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">ACTIVO</div>
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent flex items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[14px]">info</span>
+            <span class="font-label-caps text-[9px] text-primary/90 tracking-widest">TAP PARA DETALLES</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-headline-sm text-[22px] text-on-surface">Guji Sidamo G1</h3>
+          <p class="font-body-md text-on-surface-variant text-sm">Etiopía • Lavado • Notas Cítricas</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Huila Geisha -->
+      <div class="varietal-card unselected min-w-[280px] glass-card rounded-xl p-4 space-y-3"
+           data-id="huila"
+           onclick="selectVarietal('huila')">
+        <div class="aspect-[4/3] rounded-lg overflow-hidden relative">
+          <img class="w-full h-full object-cover grayscale-[0.3]"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqZdMom4JQKxg9s0-R9VfCfc77bgoB1u9whpTGTGHfL3X7-G0x0gf-prlXT3jd5Xe80J9AS0K5a1U6lYZh35dFY29-nHTiQM0OYITxVdKppDWohNfUkCgkkXFVX3HgAxQvKnU68Wbugtwr7WV6_0m6Lry1pYuZDaT2TeN-uZ15yT36iEo0uCDf3xgRFcYoNhOPWNzbf7wle5HMA7oRCUTI06215qZCN4_YUoMvwnPNBNiOLrAzDhWqUt-pXHISTlsjkYf2iTbS_SpP"
+               alt="Huila Geisha coffee beans"/>
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent flex items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[14px]">info</span>
+            <span class="font-label-caps text-[9px] text-primary/90 tracking-widest">TAP PARA DETALLES</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-headline-sm text-[22px] text-on-surface">Huila Geisha</h3>
+          <p class="font-body-md text-on-surface-variant text-sm">Colombia • Natural • Jazmín</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Yirgacheffe -->
+      <div class="varietal-card unselected min-w-[280px] glass-card rounded-xl p-4 space-y-3"
+           data-id="yirga"
+           onclick="selectVarietal('yirga')">
+        <div class="aspect-[4/3] rounded-lg overflow-hidden relative bg-surface-container-high flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary/40 text-[64px]">coffee</span>
+          <div class="absolute top-2 left-2 bg-surface-container text-on-surface-variant px-2 py-1 rounded text-[10px] tracking-widest uppercase font-bold">PRÓXIMO</div>
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent flex items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[14px]">info</span>
+            <span class="font-label-caps text-[9px] text-primary/90 tracking-widest">TAP PARA DETALLES</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-headline-sm text-[22px] text-on-surface">Yirgacheffe Washed</h3>
+          <p class="font-body-md text-on-surface-variant text-sm">Etiopía • Lavado • Floral</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Descriptor de Perfil (dinámico) -->
+  <section class="glass-card rounded-xl p-6 space-y-4">
+    <h3 class="font-headline-sm text-[18px] text-on-surface flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1">analytics</span>
+      Descriptor de Perfil
+    </h3>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="space-y-1">
+        <span class="font-label-caps text-label-caps text-on-surface-variant">TUESTE</span>
+        <p id="desc-tueste" class="font-body-md text-primary">Medio-Ligero</p>
+      </div>
+      <div class="space-y-1">
+        <span class="font-label-caps text-label-caps text-on-surface-variant">PROCESO</span>
+        <p id="desc-proceso" class="font-body-md text-primary">Lavado Extendido</p>
+      </div>
+      <div class="space-y-1">
+        <span class="font-label-caps text-label-caps text-on-surface-variant">ALTITUD</span>
+        <p id="desc-altitud" class="font-body-md text-primary">1,800–2,200 msnm</p>
+      </div>
+      <div class="space-y-1">
+        <span class="font-label-caps text-label-caps text-on-surface-variant">TOSTADOR</span>
+        <p id="desc-tostador" class="font-body-md text-primary">Inefable Café</p>
+      </div>
+    </div>
+    <div class="pt-3 border-t border-primary/10 space-y-2">
+      <span class="font-label-caps text-label-caps text-on-surface-variant">NOTAS DETECTADAS</span>
+      <div id="desc-notas" class="flex flex-wrap gap-2">
+        <span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Limón</span>
+        <span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Té Negro</span>
+        <span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Durazno</span>
+        <span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Bergamota</span>
+      </div>
+      <p id="desc-cita" class="font-body-md text-on-surface-variant italic text-sm pt-1">
+        "Una taza compleja que evoluciona desde notas de té negro hacia una dulzura de durazno maduro."
+      </p>
+    </div>
+  </section>
+
+  <!-- Rating Form -->
+  <section class="space-y-8">
+    <div class="space-y-1">
+      <h2 class="font-display-md text-[28px] text-on-surface" style="font-family:'Cormorant Garamond'">Califica tu Ritual</h2>
+      <p class="font-body-md text-on-surface-variant text-sm">La precisión en tu percepción define la excelencia del proceso.</p>
+    </div>
+    <form class="space-y-8" onsubmit="submitRating(event)">
+
+      <!-- General Rating – Stars -->
+      <div class="space-y-3">
+        <label class="font-label-caps text-label-caps text-primary">IMPRESIÓN GENERAL</label>
+        <div class="flex gap-3" id="stars-container">
+          <button type="button" class="star-btn" data-val="1" onclick="setStars(1)">
+            <span class="material-symbols-outlined text-[44px] text-primary" id="star-1" style="font-variation-settings:'FILL' 1">star</span>
+          </button>
+          <button type="button" class="star-btn" data-val="2" onclick="setStars(2)">
+            <span class="material-symbols-outlined text-[44px] text-primary" id="star-2" style="font-variation-settings:'FILL' 1">star</span>
+          </button>
+          <button type="button" class="star-btn" data-val="3" onclick="setStars(3)">
+            <span class="material-symbols-outlined text-[44px] text-primary" id="star-3" style="font-variation-settings:'FILL' 1">star</span>
+          </button>
+          <button type="button" class="star-btn" data-val="4" onclick="setStars(4)">
+            <span class="material-symbols-outlined text-[44px] text-primary" id="star-4" style="font-variation-settings:'FILL' 1">star</span>
+          </button>
+          <button type="button" class="star-btn" data-val="5" onclick="setStars(5)">
+            <span class="material-symbols-outlined text-[44px] text-outline" id="star-5">star</span>
+          </button>
+        </div>
+        <p class="font-label-caps text-label-caps text-on-surface-variant" id="stars-label">4 de 5 estrellas</p>
+      </div>
+
+      <!-- Attribute Sliders -->
+      <div class="space-y-6 glass-card rounded-xl p-6">
+        <h4 class="font-label-caps text-label-caps text-on-surface-variant border-b border-primary/10 pb-3">ATRIBUTOS ESPECÍFICOS</h4>
+
+        <!-- Aroma -->
+        <div class="space-y-2 attr-row">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-body-md text-on-surface">Aroma</span>
+            <span class="text-primary font-bold font-label-caps text-label-caps" id="aroma-val">4/5</span>
+          </div>
+          <div class="flex gap-2" id="aroma-dots">
+            <div class="attr-dot filled" onclick="setAttr('aroma',1)">1</div>
+            <div class="attr-dot filled" onclick="setAttr('aroma',2)">2</div>
+            <div class="attr-dot filled" onclick="setAttr('aroma',3)">3</div>
+            <div class="attr-dot filled" onclick="setAttr('aroma',4)">4</div>
+            <div class="attr-dot" onclick="setAttr('aroma',5)">5</div>
+          </div>
+        </div>
+
+        <!-- Acidez -->
+        <div class="space-y-2 attr-row">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-body-md text-on-surface">Acidez</span>
+            <span class="text-primary font-bold font-label-caps text-label-caps" id="acidez-val">3/5</span>
+          </div>
+          <div class="flex gap-2" id="acidez-dots">
+            <div class="attr-dot filled" onclick="setAttr('acidez',1)">1</div>
+            <div class="attr-dot filled" onclick="setAttr('acidez',2)">2</div>
+            <div class="attr-dot filled" onclick="setAttr('acidez',3)">3</div>
+            <div class="attr-dot" onclick="setAttr('acidez',4)">4</div>
+            <div class="attr-dot" onclick="setAttr('acidez',5)">5</div>
+          </div>
+        </div>
+
+        <!-- Dulzura -->
+        <div class="space-y-2 attr-row">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-body-md text-on-surface">Dulzura</span>
+            <span class="text-primary font-bold font-label-caps text-label-caps" id="dulzura-val">5/5</span>
+          </div>
+          <div class="flex gap-2" id="dulzura-dots">
+            <div class="attr-dot filled" onclick="setAttr('dulzura',1)">1</div>
+            <div class="attr-dot filled" onclick="setAttr('dulzura',2)">2</div>
+            <div class="attr-dot filled" onclick="setAttr('dulzura',3)">3</div>
+            <div class="attr-dot filled" onclick="setAttr('dulzura',4)">4</div>
+            <div class="attr-dot filled" onclick="setAttr('dulzura',5)">5</div>
+          </div>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="space-y-2 attr-row">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-body-md text-on-surface">Cuerpo</span>
+            <span class="text-primary font-bold font-label-caps text-label-caps" id="cuerpo-val">4/5</span>
+          </div>
+          <div class="flex gap-2" id="cuerpo-dots">
+            <div class="attr-dot filled" onclick="setAttr('cuerpo',1)">1</div>
+            <div class="attr-dot filled" onclick="setAttr('cuerpo',2)">2</div>
+            <div class="attr-dot filled" onclick="setAttr('cuerpo',3)">3</div>
+            <div class="attr-dot filled" onclick="setAttr('cuerpo',4)">4</div>
+            <div class="attr-dot" onclick="setAttr('cuerpo',5)">5</div>
+          </div>
+        </div>
+
+        <!-- Retrogusto -->
+        <div class="space-y-2 attr-row">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-body-md text-on-surface">Retrogusto</span>
+            <span class="text-primary font-bold font-label-caps text-label-caps" id="retrogusto-val">4/5</span>
+          </div>
+          <div class="flex gap-2" id="retrogusto-dots">
+            <div class="attr-dot filled" onclick="setAttr('retrogusto',1)">1</div>
+            <div class="attr-dot filled" onclick="setAttr('retrogusto',2)">2</div>
+            <div class="attr-dot filled" onclick="setAttr('retrogusto',3)">3</div>
+            <div class="attr-dot filled" onclick="setAttr('retrogusto',4)">4</div>
+            <div class="attr-dot" onclick="setAttr('retrogusto',5)">5</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tasting Notes -->
+      <div class="space-y-3">
+        <label class="font-label-caps text-label-caps text-primary">NOTAS DE CATA PERSONALES</label>
+        <textarea id="notes-field"
+          class="w-full bg-surface/30 border border-primary/20 focus:border-primary focus:ring-0 focus:outline-none text-on-surface placeholder:text-on-surface-variant/50 p-4 font-body-md h-32 rounded-xl resize-none transition-colors"
+          placeholder="Describe la evolución de la temperatura y los descriptores detectados..."></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit"
+        class="w-full bg-primary text-on-primary font-label-caps text-[13px] tracking-[0.2em] py-5 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform flex items-center justify-center gap-3">
+        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">grade</span>
+        ENVIAR MI RITUAL
+      </button>
+    </form>
+  </section>
+
+  <!-- Origin Capsule -->
+  <section class="relative h-[220px] rounded-xl overflow-hidden glass-card group cursor-pointer" onclick="openSheet(currentVarietal)">
+    <img id="origin-img"
+         class="w-full h-full object-cover absolute inset-0 opacity-40 grayscale-[0.2]"
+         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7"
+         alt="Origin landscape"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+    <div class="relative z-10 p-6 flex flex-col justify-end h-full">
+      <span class="font-label-caps text-[10px] text-primary tracking-widest">CÁPSULA DE ORIGEN</span>
+      <h4 id="origin-title" class="text-[26px] text-on-surface" style="font-family:'Cormorant Garamond'">Sidama, Ethiopia</h4>
+      <p id="origin-sub" class="font-body-md text-sm text-on-surface-variant mt-1">Explora la historia y el terroir de este café único</p>
+      <div class="flex items-center gap-2 mt-3">
+        <span class="material-symbols-outlined text-primary text-[16px]">open_in_full</span>
+        <span class="font-label-caps text-[10px] text-primary tracking-widest">TAP PARA VER MÁS</span>
+      </div>
+    </div>
+  </section>
+
 </main>
-<!-- Footer -->
-<footer class="w-full py-section-gap border-t border-outline-variant/30 px-6 bg-background">
-<div class="max-w-container-max mx-auto flex flex-col gap-12">
-<div class="flex flex-col gap-8">
-<span class="font-headline-sm text-headline-sm text-primary">Barra Infiltrada</span>
-<nav class="flex flex-col gap-4">
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Instagram</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Origin Stories</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Brew Guides</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
-</nav>
-</div>
-<div class="pt-8 border-t border-primary/5">
-<p class="font-body-md text-sm text-on-surface-variant opacity-60">
-                    © 2024 Barra Infiltrada by Be Coffee. The ritual of coffee.
-                </p>
-</div>
-</div>
-</footer>
+
 <!-- Bottom Mobile Nav -->
-<div class="md:hidden fixed bottom-0 left-0 w-full bg-surface/80 backdrop-blur-xl border-t border-primary/10 flex justify-around items-center h-20 z-50 px-6">
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="/">
-<span class="material-symbols-outlined">home</span>
-<span class="font-label-caps text-[9px]">HOME</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-primary" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">coffee</span>
-<span class="font-label-caps text-[9px]">BARRA</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">history</span>
-<span class="font-label-caps text-[9px]">HISTORY</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">settings_input_component</span>
-<span class="font-label-caps text-[9px]">METHODS</span>
-</a>
+<div class="fixed bottom-0 left-0 w-full bg-surface/80 backdrop-blur-xl border-t border-primary/10 flex justify-around items-center h-20 z-40 px-6">
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="/">
+    <span class="material-symbols-outlined">home</span>
+    <span class="font-label-caps text-[9px]">HOME</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-primary" href="#">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">coffee</span>
+    <span class="font-label-caps text-[9px]">BARRA</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+    <span class="material-symbols-outlined">history</span>
+    <span class="font-label-caps text-[9px]">HISTORY</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+    <span class="material-symbols-outlined">settings_input_component</span>
+    <span class="font-label-caps text-[9px]">METHODS</span>
+  </a>
 </div>
+
+<!-- ========== DETAIL BOTTOM SHEET ========== -->
+<div id="sheet-backdrop"
+     class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none"
+     onclick="closeSheet()"></div>
+
+<div id="detail-sheet"
+     class="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl overflow-hidden"
+     style="max-height:90vh;background:rgba(22,19,13,0.97);border-top:1px solid rgba(242,195,107,0.3);backdrop-filter:blur(30px)">
+
+  <!-- Sheet handle -->
+  <div class="flex justify-center pt-4 pb-2">
+    <div class="w-10 h-1 rounded-full bg-outline-variant"></div>
+  </div>
+
+  <!-- Sheet content (scrollable) -->
+  <div class="overflow-y-auto hide-scrollbar" style="max-height:calc(90vh - 40px)">
+    <div class="px-6 pb-12 space-y-6">
+
+      <!-- Sheet header image -->
+      <div class="relative h-52 rounded-xl overflow-hidden -mx-0 mt-2">
+        <img id="sheet-img" class="w-full h-full object-cover" src="" alt=""/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+        <button onclick="closeSheet()"
+                class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center">
+          <span class="material-symbols-outlined text-white text-[20px]">close</span>
+        </button>
+        <div class="absolute bottom-4 left-4">
+          <span id="sheet-badge" class="bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase"></span>
+        </div>
+      </div>
+
+      <!-- Name & origin -->
+      <div class="space-y-1">
+        <p id="sheet-origin-label" class="font-label-caps text-label-caps text-primary tracking-widest"></p>
+        <h2 id="sheet-name" class="text-on-surface" style="font-family:'Cormorant Garamond';font-size:36px;line-height:1.1;font-weight:300"></h2>
+        <p id="sheet-tagline" class="font-body-md text-on-surface-variant italic text-sm"></p>
+      </div>
+
+      <!-- Info grid -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="glass-card rounded-xl p-4 space-y-1">
+          <span class="font-label-caps text-[10px] text-on-surface-variant">PROCESO</span>
+          <p id="sheet-proceso" class="font-body-md text-on-surface text-sm"></p>
+        </div>
+        <div class="glass-card rounded-xl p-4 space-y-1">
+          <span class="font-label-caps text-[10px] text-on-surface-variant">TUESTE</span>
+          <p id="sheet-tueste" class="font-body-md text-on-surface text-sm"></p>
+        </div>
+        <div class="glass-card rounded-xl p-4 space-y-1">
+          <span class="font-label-caps text-[10px] text-on-surface-variant">ALTITUD</span>
+          <p id="sheet-altitud" class="font-body-md text-on-surface text-sm"></p>
+        </div>
+        <div class="glass-card rounded-xl p-4 space-y-1">
+          <span class="font-label-caps text-[10px] text-on-surface-variant">VARIEDAD</span>
+          <p id="sheet-variedad" class="font-body-md text-on-surface text-sm"></p>
+        </div>
+      </div>
+
+      <!-- Tostador -->
+      <div class="glass-card rounded-xl p-4 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-primary text-[20px]">local_cafe</span>
+        </div>
+        <div class="space-y-0.5">
+          <span class="font-label-caps text-[10px] text-on-surface-variant">TOSTADO POR</span>
+          <p id="sheet-tostador" class="font-body-md text-on-surface text-sm font-medium"></p>
+        </div>
+      </div>
+
+      <!-- Flavor notes -->
+      <div class="space-y-3">
+        <span class="font-label-caps text-label-caps text-on-surface-variant">PERFIL DE SABOR</span>
+        <div id="sheet-notas" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Description -->
+      <div class="space-y-2">
+        <span class="font-label-caps text-label-caps text-on-surface-variant">HISTORIA DEL ORIGEN</span>
+        <p id="sheet-desc" class="font-body-md text-on-surface-variant text-sm leading-relaxed"></p>
+      </div>
+
+      <!-- CTA: select this varietal -->
+      <button id="sheet-select-btn"
+              class="w-full bg-primary text-on-primary font-label-caps text-[13px] tracking-[0.2em] py-5 rounded-xl font-bold active:scale-95 transition-transform"
+              onclick="confirmSelection()">
+        CALIFICAR ESTE CAFÉ
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- Success Toast -->
+<div id="toast"
+     class="fixed top-24 left-1/2 -translate-x-1/2 z-[60] glass-card rounded-full px-6 py-3 flex items-center gap-3 opacity-0 pointer-events-none shadow-xl"
+     style="border-color:rgba(242,195,107,0.4)">
+  <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1">check_circle</span>
+  <span id="toast-msg" class="font-label-caps text-label-caps text-on-surface tracking-widest"></span>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const varietals = {
+  guji: {
+    name: "Guji Sidamo G1",
+    originLabel: "ETIOPÍA · SIDAMA",
+    tagline: "Luminoso, vibrante, con una acidez brillante de cítricos maduros.",
+    proceso: "Lavado Extendido",
+    tueste: "Medio-Ligero",
+    altitud: "1,800–2,200 msnm",
+    variedad: "Heirloom Etíope",
+    tostador: "Inefable Café",
+    notas: ["Limón Meyer","Té Negro","Durazno","Bergamota","Jazmín"],
+    desc: "Los granos Guji Sidamo G1 provienen de pequeños productores en la zona de Sidama, conocida por producir algunos de los mejores cafés de Etiopía. El proceso de lavado extendido realza la claridad y la acidez brillante que caracteriza a esta región. La familia Bekele lleva tres generaciones cultivando este varietal en las alturas neblinosas de la meseta etíope.",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuC6kFCJ_VSJEORCJwGn_qxIgUJ-cO7Bw4-n8IVcHAG5iTpm8u0_jDhe_oOebw6D0NEloQ54w6jJV_x2DAmPg27oU-J0FW15KdRyalIOp_L9gEVci8K_o4DIbmGfhKUbc3pdq7wwpfnzx7LXUyYZ1hjcdGCe9jX6RriGll2X3ndd_9lJUNw_QSgd0ml28J4F1i-a0aR53-KHG-OYNr3KgYx_dz0Z1SypljXbrg1NTKjzmDk-YxDH69bS5JMPCSQUgMdCxJ9lV9jI7VHK",
+    badge: "ACTIVO",
+    originImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7",
+    originTitle: "Sidama, Ethiopia",
+    originSub: "Explorar la historia de la familia Bekele y su compromiso con la biodiversidad en la región de Guji.",
+    cita: '"Una taza compleja que evoluciona desde notas de té negro hacia una dulzura de durazno maduro."'
+  },
+  huila: {
+    name: "Huila Geisha",
+    originLabel: "COLOMBIA · HUILA",
+    tagline: "Elegante y floral, con una claridad cristalina y dulzura natural.",
+    proceso: "Natural Honey",
+    tueste: "Ligero",
+    altitud: "1,600–1,900 msnm",
+    variedad: "Geisha / Gesha",
+    tostador: "El Recreo Tostadores",
+    notas: ["Jazmín","Lychee","Maracuyá","Panela","Rosa"],
+    desc: "La variedad Geisha, originaria de Etiopía pero perfectamente adaptada a las laderas volcánicas del Huila colombiano, produce tazas de extraordinaria complejidad aromática. El proceso honey conserva parte de la pulpa del fruto durante el secado, añadiendo una dulzura natural muy particular. Esta cosecha proviene del predio La Divisa, a 1,750 msnm, con sombra de guamos centenarios.",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCqZdMom4JQKxg9s0-R9VfCfc77bgoB1u9whpTGTGHfL3X7-G0x0gf-prlXT3jd5Xe80J9AS0K5a1U6lYZh35dFY29-nHTiQM0OYITxVdKppDWohNfUkCgkkXFVX3HgAxQvKnU68Wbugtwr7WV6_0m6Lry1pYuZDaT2TeN-uZ15yT36iEo0uCDf3xgRFcYoNhOPWNzbf7wle5HMA7oRCUTI06215qZCN4_YUoMvwnPNBNiOLrAzDhWqUt-pXHISTlsjkYf2iTbS_SpP",
+    badge: "DISPONIBLE",
+    originImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuCqZdMom4JQKxg9s0-R9VfCfc77bgoB1u9whpTGTGHfL3X7-G0x0gf-prlXT3jd5Xe80J9AS0K5a1U6lYZh35dFY29-nHTiQM0OYITxVdKppDWohNfUkCgkkXFVX3HgAxQvKnU68Wbugtwr7WV6_0m6Lry1pYuZDaT2TeN-uZ15yT36iEo0uCDf3xgRFcYoNhOPWNzbf7wle5HMA7oRCUTI06215qZCN4_YUoMvwnPNBNiOLrAzDhWqUt-pXHISTlsjkYf2iTbS_SpP",
+    originTitle: "Huila, Colombia",
+    originSub: "Las laderas volcánicas del Huila, hogar del Geisha colombiano más elegante.",
+    cita: '"Una flor líquida: fragante, etérea, que se desvanece como recuerdo de un jardín en lluvia."'
+  },
+  yirga: {
+    name: "Yirgacheffe Washed",
+    originLabel: "ETIOPÍA · YIRGACHEFFE",
+    tagline: "Floral y delicado, el café que definió un estilo de taza.",
+    proceso: "Lavado Tradicional",
+    tueste: "Ligero",
+    altitud: "1,750–2,200 msnm",
+    variedad: "Heirloom Etíope",
+    tostador: "Por confirmar",
+    notas: ["Lavanda","Limón","Vainilla","Flor de Naranja","Mango"],
+    desc: "Yirgacheffe es considerada la cuna del café especial en Etiopía. Sus granos lavados producen tazas de extrema delicadeza floral y acidez brillante. Esta región al sur de Etiopía cuenta con una biodiversidad de variedades silvestres que no existe en ningún otro lugar del mundo. Próxima incorporación a la Barra Infiltrada.",
+    img: "",
+    badge: "PRÓXIMO",
+    originImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7",
+    originTitle: "Yirgacheffe, Ethiopia",
+    originSub: "La región que le dio identidad al café especial etíope.",
+    cita: '"Como beber perfume: floral, translúcido, inevitable."'
+  }
+};
+
+let currentVarietal = 'guji';
+let currentStars = 4;
+const attrValues = { aroma: 4, acidez: 3, dulzura: 5, cuerpo: 4, retrogusto: 4 };
+
+// ============================================================
+// VARIETAL SELECTION
+// ============================================================
+function selectVarietal(id) {
+  const data = varietals[id];
+  currentVarietal = id;
+
+  // Update card styles
+  document.querySelectorAll('.varietal-card').forEach(c => {
+    if (c.dataset.id === id) {
+      c.classList.add('selected');
+      c.classList.remove('unselected');
+    } else {
+      c.classList.remove('selected');
+      c.classList.add('unselected');
+    }
+  });
+
+  // Update descriptor
+  document.getElementById('desc-tueste').textContent = data.tueste;
+  document.getElementById('desc-proceso').textContent = data.proceso;
+  document.getElementById('desc-altitud').textContent = data.altitud;
+  document.getElementById('desc-tostador').textContent = data.tostador;
+  document.getElementById('desc-cita').textContent = data.cita;
+
+  // Update notas chips
+  const notasEl = document.getElementById('desc-notas');
+  notasEl.innerHTML = data.notas.map(n =>
+    `<span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">${n}</span>`
+  ).join('');
+
+  // Update origin capsule
+  document.getElementById('origin-title').textContent = data.originTitle;
+  document.getElementById('origin-sub').textContent = data.originSub;
+  if (data.originImg) document.getElementById('origin-img').src = data.originImg;
+
+  // Open detail sheet
+  openSheet(id);
+}
+
+// ============================================================
+// BOTTOM SHEET
+// ============================================================
+function openSheet(id) {
+  const data = varietals[id];
+  const sheet = document.getElementById('detail-sheet');
+  const backdrop = document.getElementById('sheet-backdrop');
+
+  // Populate
+  document.getElementById('sheet-img').src = data.img || data.originImg;
+  document.getElementById('sheet-badge').textContent = data.badge;
+  document.getElementById('sheet-origin-label').textContent = data.originLabel;
+  document.getElementById('sheet-name').textContent = data.name;
+  document.getElementById('sheet-tagline').textContent = data.tagline;
+  document.getElementById('sheet-proceso').textContent = data.proceso;
+  document.getElementById('sheet-tueste').textContent = data.tueste;
+  document.getElementById('sheet-altitud').textContent = data.altitud;
+  document.getElementById('sheet-variedad').textContent = data.variedad;
+  document.getElementById('sheet-tostador').textContent = data.tostador;
+  document.getElementById('sheet-desc').textContent = data.desc;
+  document.getElementById('sheet-notas').innerHTML = data.notas.map(n =>
+    `<span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">${n}</span>`
+  ).join('');
+
+  // Animate in
+  backdrop.style.opacity = '1';
+  backdrop.style.pointerEvents = 'auto';
+  requestAnimationFrame(() => sheet.classList.add('open'));
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSheet() {
+  const sheet = document.getElementById('detail-sheet');
+  const backdrop = document.getElementById('sheet-backdrop');
+  sheet.classList.remove('open');
+  backdrop.style.opacity = '0';
+  backdrop.style.pointerEvents = 'none';
+  document.body.style.overflow = '';
+}
+
+function confirmSelection() {
+  closeSheet();
+  showToast(`${varietals[currentVarietal].name} seleccionado`);
+  // scroll to form
+  setTimeout(() => {
+    document.querySelector('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 400);
+}
+
+// ============================================================
+// STARS
+// ============================================================
+const starLabels = ['', '1 estrella', '2 estrellas', '3 estrellas', '4 estrellas', '5 estrellas'];
+function setStars(val) {
+  currentStars = val;
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById(`star-${i}`);
+    if (i <= val) {
+      el.style.fontVariationSettings = "'FILL' 1";
+      el.className = 'material-symbols-outlined text-[44px] text-primary';
+    } else {
+      el.style.fontVariationSettings = "'FILL' 0";
+      el.className = 'material-symbols-outlined text-[44px] text-outline';
+    }
+  }
+  document.getElementById('stars-label').textContent = `${val} de 5 estrellas`;
+}
+
+// ============================================================
+// ATTRIBUTE DOTS
+// ============================================================
+function setAttr(attr, val) {
+  attrValues[attr] = val;
+  const container = document.getElementById(`${attr}-dots`);
+  container.querySelectorAll('.attr-dot').forEach((dot, i) => {
+    if (i < val) {
+      dot.classList.add('filled');
+    } else {
+      dot.classList.remove('filled');
+    }
+  });
+  document.getElementById(`${attr}-val`).textContent = `${val}/5`;
+}
+
+// ============================================================
+// SUBMIT
+// ============================================================
+function submitRating(e) {
+  e.preventDefault();
+  const payload = {
+    varietal: varietals[currentVarietal].name,
+    generalRating: currentStars,
+    attributes: { ...attrValues },
+    notes: document.getElementById('notes-field').value,
+    timestamp: new Date().toISOString()
+  };
+  console.log('Rating submitted:', payload);
+  showToast('¡Ritual enviado! Gracias por tu cata.');
+  setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 600);
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg.toUpperCase();
+  toast.style.opacity = '1';
+  toast.style.pointerEvents = 'auto';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.pointerEvents = 'none';
+  }, 3000);
+}
+</script>
 </body></html>
