@@ -42,8 +42,9 @@ CREATE TABLE IF NOT EXISTS ratings (
 
 -- Seed data
 INSERT INTO coffees (name, origin, process, altitude, roaster, flavor_notes, description, is_active) VALUES
-('Kochere Natural', 'Etiopía', 'Natural Seco', '1,950 msnm', 'Inefable', ARRAY['Jazmín', 'Moras', 'Té Negro'], 'Una taza compleja que evoluciona desde notas de té negro hacia una dulzura de durazno maduro.', true),
-('El Paraíso', 'Colombia', 'Doble Anaeróbico', '1,800 msnm', 'El Recreo', ARRAY['Lychee', 'Yogurt', 'Fruta Roja'], 'Proceso doble anaeróbico que potencia las notas frutales tropicales.', false);
+('Terroir', 'Águas Paulistas, Brasil', 'Natural', '700–1.100 msnm', 'Ángel', ARRAY['Chocolate', 'Azúcar Mascabo', 'Ácido Cítrico', 'Crema'], 'Chocolate, azúcar mascabo, ácido cítrico y crema. Ácido, herbal y acaramelado.', true),
+('Berry Bliss', 'Alta Mogiana, Brasil', 'Natural', '700–1.100 msnm', 'Ángel', ARRAY['Arándanos', 'Jarabe de Arce', 'Azúcar Mascabo', 'Crema'], 'Balanceado y cremoso. Suave, dulce y aromático.', false),
+('San Agustín', 'Huila, Colombia', 'Lavado', '1.700 msnm', 'Ángel', ARRAY['Frutos Rojos', 'Caramelo', 'Chocolate Negro'], 'Cuerpo sedoso con aroma bien intenso. Balanceado y sutil.', false);
 
 INSERT INTO editions (number, title, description, attendees, average_rating, image_url, event_date) VALUES
 (4, 'Galería Objeto', 'Donde el café se vuelve materia escultórica.', 42, 4.9, 'https://lh3.googleusercontent.com/aida-public/AB6AXuB9mWxP58k1Rl9HQEyi1Q-_I30jFSjAnRrN5F9LAVeo4taYBn03JNNJmk9XWhyoBQtk528wFXG72p0mJZeth_rSvtGmdJ4NjQAyzb45MWY4bwBMFtj1VSct_yVPFFNUCJCJ_Z8xzjr0vDaOPYzwUi1wK9bmyfB3cjV4l_lI2s8Sg2Lx2nftmKaB4AJvcgABBTgPcyGw7fF7eLxId3TTKJMiqQz_f2k5ef0mUk2XN55HjBejX2hS1Orlfy1yVhNrlaqQFEAazJ4odefp', '2024-11-15'),

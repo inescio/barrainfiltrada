@@ -6,39 +6,60 @@ import Link from 'next/link'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 
+const IMG_BRASIL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6kFCJ_VSJEORCJwGn_qxIgUJ-cO7Bw4-n8IVcHAG5iTpm8u0_jDhe_oOebw6D0NEloQ54w6jJV_x2DAmPg27oU-J0FW15KdRyalIOp_L9gEVci8K_o4DIbmGfhKUbc3pdq7wwpfnzx7LXUyYZ1hjcdGCe9jX6RriGll2X3ndd_9lJUNw_QSgd0ml28J4F1i-a0aR53-KHG-OYNr3KgYx_dz0Z1SypljXbrg1NTKjzmDk-YxDH69bS5JMPCSQUgMdCxJ9lV9jI7VHK'
+const IMG_COLOMBIA = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqZdMom4JQKxg9s0-R9VfCfc77bgoB1u9whpTGTGHfL3X7-G0x0gf-prlXT3jd5Xe80J9AS0K5a1U6lYZh35dFY29-nHTiQM0OYITxVdKppDWohNfUkCgkkXFVX3HgAxQvKnU68Wbugtwr7WV6_0m6Lry1pYuZDaT2TeN-uZ15yT36iEo0uCDf3xgRFcYoNhOPWNzbf7wle5HMA7oRCUTI06215qZCN4_YUoMvwnPNBNiOLrAzDhWqUt-pXHISTlsjkYf2iTbS_SpP'
+const IMG_ORIGIN = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7'
+
 const varietals = [
   {
-    id: 'guji-sidamo',
-    name: 'Guji Sidamo G1',
-    origin: 'Etiopía',
-    process: 'Lavado',
-    notes: 'Notas Cítricas',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6kFCJ_VSJEORCJwGn_qxIgUJ-cO7Bw4-n8IVcHAG5iTpm8u0_jDhe_oOebw6D0NEloQ54w6jJV_x2DAmPg27oU-J0FW15KdRyalIOp_L9gEVci8K_o4DIbmGfhKUbc3pdq7wwpfnzx7LXUyYZ1hjcdGCe9jX6RriGll2X3ndd_9lJUNw_QSgd0ml28J4F1i-a0aR53-KHG-OYNr3KgYx_dz0Z1SypljXbrg1NTKjzmDk-YxDH69bS5JMPCSQUgMdCxJ9lV9jI7VHK',
+    id: 'terroir',
+    name: 'Terroir',
+    origin: 'Brasil',
+    process: 'Natural',
+    notes: 'Chocolate · Ácido Cítrico',
+    image: IMG_BRASIL,
     active: true,
     profile: {
-      roast: 'Medio-Ligero',
-      process: 'Lavado Extendido',
-      description: 'Notas de té negro, frutos del bosque y un final largo y dulce.',
-      origin: 'Sidama, Etiopía',
-      originStory: 'Cultivado en la región de Guji, a más de 1.900 metros de altura.',
-      originImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7',
+      roast: 'Medio',
+      process: 'Natural',
+      description: 'Chocolate, azúcar mascabo, ácido cítrico y crema. Ácido, herbal y acaramelado.',
+      origin: 'Águas Paulistas, Brasil',
+      originStory: 'Fincas selectas a 700–1.100 msnm. Varietales Catuaí Amarelo y Mundo Novo.',
+      originImage: IMG_ORIGIN,
     },
   },
   {
-    id: 'huila-geisha',
-    name: 'Huila Geisha',
-    origin: 'Colombia',
+    id: 'berry-bliss',
+    name: 'Berry Bliss',
+    origin: 'Brasil',
     process: 'Natural',
-    notes: 'Jazmín',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqZdMom4JQKxg9s0-R9VfCfc77bgoB1u9whpTGTGHfL3X7-G0x0gf-prlXT3jd5Xe80J9AS0K5a1U6lYZh35dFY29-nHTiQM0OYITxVdKppDWohNfUkCgkkXFVX3HgAxQvKnU68Wbugtwr7WV6_0m6Lry1pYuZDaT2TeN-uZ15yT36iEo0uCDf3xgRFcYoNhOPWNzbf7wle5HMA7oRCUTI06215qZCN4_YUoMvwnPNBNiOLrAzDhWqUt-pXHISTlsjkYf2iTbS_SpP',
+    notes: 'Arándanos · Jarabe de Arce',
+    image: IMG_BRASIL,
     active: false,
     profile: {
-      roast: 'Ligero',
+      roast: 'Medio-Ligero',
       process: 'Natural',
-      description: 'Floral, con acidez suave y un retrogusto dulce.',
+      description: 'Arándanos, jarabe de arce, azúcar mascabo y crema. Balanceado, cremoso y dulce.',
+      origin: 'Alta Mogiana, Paraná',
+      originStory: 'Varietal Obatá cultivado a 700–1.100 msnm en la región de Alta Mogiana.',
+      originImage: IMG_ORIGIN,
+    },
+  },
+  {
+    id: 'san-agustin',
+    name: 'San Agustín',
+    origin: 'Colombia',
+    process: 'Lavado',
+    notes: 'Frutos Rojos · Caramelo',
+    image: IMG_COLOMBIA,
+    active: false,
+    profile: {
+      roast: 'Medio',
+      process: 'Lavado',
+      description: 'Frutos rojos, caramelo y chocolate negro. Cuerpo sedoso y aroma intenso.',
       origin: 'Huila, Colombia',
-      originStory: 'Cultivado en el departamento de Huila, una de las regiones cafeteras más reconocidas de Colombia.',
-      originImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7',
+      originStory: 'Finca San Agustín a 1.700 msnm en el departamento del Huila.',
+      originImage: IMG_ORIGIN,
     },
   },
 ]

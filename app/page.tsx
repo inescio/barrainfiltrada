@@ -42,62 +42,53 @@ export default function Home() {
             <h2 className="font-headline-sm text-on-surface">Selección de Grano</h2>
           </div>
           <div className="space-y-6">
-            {/* Coffee Card 1 */}
-            <div className="glass-card rounded-xl p-8 overflow-hidden relative group">
-              <div className="flex flex-col gap-6">
-                <div>
-                  <span className="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Etiopía</span>
-                  <h3 className="font-headline-sm text-[28px] mt-1">Kochere Natural</h3>
-                  <p className="font-label-caps text-[12px] text-primary/80 mt-1">Tostado por: Inefable</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Jazmín</span>
-                  <span className="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Moras</span>
-                  <span className="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Té Negro</span>
-                </div>
-                <div className="grid grid-cols-2 gap-4 border-t border-primary/10 pt-6">
+            {[
+              {
+                origin: 'Brasil', name: 'Terroir', roaster: 'Ángel',
+                notes: ['Chocolate', 'Azúcar Mascabo', 'Ácido Cítrico', 'Crema'],
+                proceso: 'Natural', altitud: '700–1.100 msnm',
+              },
+              {
+                origin: 'Brasil', name: 'Berry Bliss', roaster: 'Ángel',
+                notes: ['Arándanos', 'Jarabe de Arce', 'Azúcar Mascabo', 'Crema'],
+                proceso: 'Natural', altitud: '700–1.100 msnm',
+              },
+              {
+                origin: 'Colombia', name: 'San Agustín', roaster: 'Ángel',
+                notes: ['Frutos Rojos', 'Caramelo', 'Chocolate Negro'],
+                proceso: 'Lavado', altitud: '1.700 msnm',
+              },
+            ].map((coffee) => (
+              <div key={coffee.name} className="glass-card rounded-xl p-8 overflow-hidden relative group">
+                <div className="flex flex-col gap-6">
                   <div>
-                    <p className="font-label-caps text-[10px] text-on-surface-variant uppercase mb-1">Proceso</p>
-                    <p className="font-body-md text-on-surface">Natural Seco</p>
+                    <span className="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">{coffee.origin}</span>
+                    <h3 className="font-headline-sm text-[28px] mt-1">{coffee.name}</h3>
+                    <p className="font-label-caps text-[12px] text-primary/80 mt-1">Tostado por: {coffee.roaster}</p>
                   </div>
-                  <div>
-                    <p className="font-label-caps text-[10px] text-on-surface-variant uppercase mb-1">Altitud</p>
-                    <p className="font-body-md text-on-surface">1,950 msnm</p>
+                  <div className="flex flex-wrap gap-2">
+                    {coffee.notes.map(n => (
+                      <span key={n} className="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">{n}</span>
+                    ))}
                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Coffee Card 2 */}
-            <div className="glass-card rounded-xl p-8 overflow-hidden relative group">
-              <div className="flex flex-col gap-6">
-                <div>
-                  <span className="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Colombia</span>
-                  <h3 className="font-headline-sm text-[28px] mt-1">El Paraíso</h3>
-                  <p className="font-label-caps text-[12px] text-primary/80 mt-1">Tostado por: El Recreo</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Lychee</span>
-                  <span className="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Yogurt</span>
-                  <span className="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-[11px] font-label-caps uppercase">Fruta Roja</span>
-                </div>
-                <div className="grid grid-cols-2 gap-4 border-t border-primary/10 pt-6">
-                  <div>
-                    <p className="font-label-caps text-[10px] text-on-surface-variant uppercase mb-1">Proceso</p>
-                    <p className="font-body-md text-on-surface">Doble Anaeróbico</p>
-                  </div>
-                  <div>
-                    <p className="font-label-caps text-[10px] text-on-surface-variant uppercase mb-1">Altitud</p>
-                    <p className="font-body-md text-on-surface">1,800 msnm</p>
+                  <div className="grid grid-cols-2 gap-4 border-t border-primary/10 pt-6">
+                    <div>
+                      <p className="font-label-caps text-[10px] text-on-surface-variant uppercase mb-1">Proceso</p>
+                      <p className="font-body-md text-on-surface">{coffee.proceso}</p>
+                    </div>
+                    <div>
+                      <p className="font-label-caps text-[10px] text-on-surface-variant uppercase mb-1">Altitud</p>
+                      <p className="font-body-md text-on-surface">{coffee.altitud}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </section>
 
         {/* La precisión del ritual */}
-        <section className="px-6 mb-section-gap">
+        <section id="metodos" className="px-6 mb-section-gap">
           <div className="flex flex-col gap-4 mb-8">
             <span className="font-label-caps text-label-caps text-primary uppercase tracking-[0.3em]">Extracción Consciente</span>
             <h2 className="font-headline-sm text-on-surface">La precisión del ritual</h2>

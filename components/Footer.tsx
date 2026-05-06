@@ -1,3 +1,11 @@
+import Link from 'next/link'
+
+const links = [
+  { label: 'Instagram', href: 'https://www.instagram.com/gonzalo.barista/', external: true },
+  { label: 'Historias de Origen', href: '/explorar', external: false },
+  { label: 'Guías de Preparación', href: '/#metodos', external: false },
+]
+
 export default function Footer({ variant = 'centered' }: { variant?: 'centered' | 'left' }) {
   if (variant === 'left') {
     return (
@@ -6,15 +14,32 @@ export default function Footer({ variant = 'centered' }: { variant?: 'centered' 
           <div className="flex flex-col gap-8">
             <span className="font-headline-sm text-headline-sm text-primary">Barra Infiltrada</span>
             <nav className="flex flex-col gap-4">
-              <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Instagram</a>
-              <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Historias de Origen</a>
-              <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Guías de Preparación</a>
-              <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Contacto</a>
+              {links.map(({ label, href, external }) =>
+                external ? (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors"
+                  >
+                    {label}
+                  </a>
+                ) : (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors"
+                  >
+                    {label}
+                  </Link>
+                )
+              )}
             </nav>
           </div>
           <div className="pt-8 border-t border-primary/5">
             <p className="font-body-md text-sm text-on-surface-variant opacity-60">
-              © 2024 Barra Infiltrada by Be Coffee.
+              © 2025 Barra Infiltrada by Be Coffee.
             </p>
           </div>
         </div>
@@ -27,13 +52,30 @@ export default function Footer({ variant = 'centered' }: { variant?: 'centered' 
       <div className="flex flex-col items-center text-center gap-12 max-w-container-max mx-auto">
         <span className="font-headline-sm text-[28px] text-primary">Barra Infiltrada</span>
         <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-          <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors uppercase" href="#">Instagram</a>
-          <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors uppercase" href="#">Historias de Origen</a>
-          <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors uppercase" href="#">Guías de Preparación</a>
-          <a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors uppercase" href="#">Contacto</a>
+          {links.map(({ label, href, external }) =>
+            external ? (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors uppercase"
+              >
+                {label}
+              </a>
+            ) : (
+              <Link
+                key={label}
+                href={href}
+                className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors uppercase"
+              >
+                {label}
+              </Link>
+            )
+          )}
         </nav>
         <p className="font-body-md text-on-surface-variant text-[12px] opacity-60">
-          © 2024 Barra Infiltrada by Be Coffee.
+          © 2025 Barra Infiltrada by Be Coffee.
         </p>
       </div>
     </footer>
