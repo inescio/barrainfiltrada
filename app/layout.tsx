@@ -3,17 +3,19 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Barra Infiltrada by Be Coffee',
-  description: 'Un ritual itinerante donde el grano, el agua y el tiempo se entrelazan en la perfección efímera.',
+  description: 'Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente.',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className="dark" lang="es">
+    <html lang="es">
       <head>
+        {/* Set theme class before first paint to avoid flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.classList.toggle('dark',t==='dark');})();`,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

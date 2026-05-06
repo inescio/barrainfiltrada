@@ -2,8 +2,8 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/api/count/route": "app/api/count/route.js",
   "/api/results/route": "app/api/results/route.js",
-  "/rating/page": "app/rating/page.js",
-  "/explorar/page": "app/explorar/page.js",
   "/api/ratings/route": "app/api/ratings/route.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/explorar/page": "app/explorar/page.js",
+  "/rating/page": "app/rating/page.js"
 }
