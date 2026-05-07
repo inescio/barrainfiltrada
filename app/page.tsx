@@ -103,7 +103,16 @@ export default function Home() {
 
           {/* Sede actual */}
           <div className="glass-card rounded-2xl overflow-hidden">
-            <div className="p-8">
+            <div className="relative h-[200px] w-full">
+              <Image
+                src="/coffes/5-cafeliterario.jpg"
+                alt="Café Literario"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
+            </div>
+            <div className="p-8 -mt-2">
               <div className="flex items-center gap-2 mb-6">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                 <span className="font-label-caps text-[11px] text-primary uppercase tracking-[0.3em]">Edición actual · En curso</span>
@@ -149,19 +158,19 @@ export default function Home() {
                 origin: 'Brasil', name: 'Terroir', roaster: 'Ángel',
                 notes: ['Chocolate', 'Azúcar Mascabo', 'Ácido Cítrico', 'Crema'],
                 proceso: 'Natural', altitud: '700–1.100 msnm',
-                image: '/pdf/AG_Lista%201KG%20Enero_page-0008.jpg',
+                image: '/pdf/notas%20de%20cata-0008.jpg',
               },
               {
                 origin: 'Brasil', name: 'Berry Bliss', roaster: 'Ángel',
                 notes: ['Arándanos', 'Jarabe de Arce', 'Azúcar Mascabo', 'Crema'],
                 proceso: 'Natural', altitud: '700–1.100 msnm',
-                image: '/pdf/AG_Lista%201KG%20Enero_page-0006.jpg',
+                image: '/pdf/notas%20de%20cata-0006.jpg',
               },
               {
                 origin: 'Colombia', name: 'San Agustín', roaster: 'Ángel',
                 notes: ['Frutos Rojos', 'Caramelo', 'Chocolate Negro'],
                 proceso: 'Lavado', altitud: '1.700 msnm',
-                image: '/pdf/AG_Lista%201KG%20Enero_page-0003.jpg',
+                image: '/pdf/notas%20de%20cata-0003.jpg',
               },
             ].map((coffee) => (
               <div key={coffee.name} className="relative h-[360px] rounded-xl overflow-hidden group">
@@ -263,8 +272,8 @@ export default function Home() {
             {/* Edition Card 1 */}
             <div className="relative h-[300px] rounded-2xl overflow-hidden group">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9mWxP58k1Rl9HQEyi1Q-_I30jFSjAnRrN5F9LAVeo4taYBn03JNNJmk9XWhyoBQtk528wFXG72p0mJZeth_rSvtGmdJ4NjQAyzb45MWY4bwBMFtj1VSct_yVPFFNUCJCJ_Z8xzjr0vDaOPYzwUi1wK9bmyfB3cjV4l_lI2s8Sg2Lx2nftmKaB4AJvcgABBTgPcyGw7fF7eLxId3TTKJMiqQz_f2k5ef0mUk2XN55HjBejX2hS1Orlfy1yVhNrlaqQFEAazJ4odefp"
-                alt="A moody, high-contrast interior of an art gallery with a minimalist coffee setup."
+                src="/coffes/4-benteveo.jpg"
+                alt="Benteveo Café"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -289,7 +298,7 @@ export default function Home() {
             {/* Edition Card 2 */}
             <div className="relative h-[300px] rounded-2xl overflow-hidden group">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuByAKWRu8GW3jmc8da_KrH7iLLfCgpNm45wjyLlf5DdkSyW1Nnc7Xjo5NqTYRlV6kQYUPwbhIH6fB42qU23weIBUh4ctFWL5_9RDTl9M5fEqvgAakcDu8zgeI_7h31KWg6YzRQcnBixLomJTRBjDdXCj1yE5tdyYthN6nHoB2A8unPwT2o_b6KksWn_W021g9cPo3ZED4fMYni8Wwr3v0iTBVIXPr6ACoB13XE1mfxYAEVtb161xxsbG-Vg0fZ1MJDHquHHW8HtZ0cV"
+                src="/coffes/3-antonieta.webp"
                 alt="Antonieta"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -314,7 +323,12 @@ export default function Home() {
 
             {/* Edition Card 3 */}
             <div className="relative h-[300px] rounded-2xl overflow-hidden group">
-              <div className="absolute inset-0 bg-surface-container"></div>
+              <Image
+                src="/coffes/2-donato.webp"
+                alt="Donato. Café Club"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
               <div className="absolute bottom-0 left-0 p-8 w-full">
                 <div className="inline-block bg-primary text-on-primary font-label-caps text-[9px] px-2 py-0.5 rounded uppercase mb-3">Edición 02</div>
@@ -335,7 +349,12 @@ export default function Home() {
 
             {/* Edition Card 4 */}
             <div className="relative h-[300px] rounded-2xl overflow-hidden group">
-              <div className="absolute inset-0 bg-surface-container"></div>
+              <Image
+                src="/coffes/1-gardelito.jpg"
+                alt="Gardelito Club"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
               <div className="absolute bottom-0 left-0 p-8 w-full">
                 <div className="inline-block bg-primary text-on-primary font-label-caps text-[9px] px-2 py-0.5 rounded uppercase mb-3">Edición 01</div>
