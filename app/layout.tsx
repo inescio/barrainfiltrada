@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     siteName: 'Barra Infiltrada',
     title: 'Barra Infiltrada — Café de Especialidad',
     description: 'Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Barra Infiltrada — Café de Especialidad' }],
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Barra Infiltrada — Café de Especialidad' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Barra Infiltrada — Café de Especialidad',
     description: 'Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente.',
-    images: ['/og-image.png'],
+    images: ['/opengraph-image'],
   },
 }
 
