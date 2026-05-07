@@ -108,16 +108,17 @@ export default function RatingPage() {
 
   const allSubmitted = submittedVarietals.size === varietals.length
 
-  useEffect(() => {
-    const fetchCount = async () => {
-      try {
-        const res = await fetch('/api/count')
-        const data = await res.json()
-        setLiveCount(data.count)
-      } catch {
-        // silently fail
-      }
+  const fetchCount = async () => {
+    try {
+      const res = await fetch('/api/count')
+      const data = await res.json()
+      setLiveCount(data.count)
+    } catch {
+      // silently fail
     }
+  }
+
+  useEffect(() => {
     fetchCount()
     const interval = setInterval(fetchCount, 30000)
     return () => clearInterval(interval)
@@ -195,6 +196,7 @@ export default function RatingPage() {
         } catch { /* silently fail */ }
       }
 
+      fetchCount()
       resetForm()
       setSelectedVarietal(null)
 
