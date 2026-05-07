@@ -6,10 +6,6 @@ import Link from 'next/link'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 
-const IMG_BRASIL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6kFCJ_VSJEORCJwGn_qxIgUJ-cO7Bw4-n8IVcHAG5iTpm8u0_jDhe_oOebw6D0NEloQ54w6jJV_x2DAmPg27oU-J0FW15KdRyalIOp_L9gEVci8K_o4DIbmGfhKUbc3pdq7wwpfnzx7LXUyYZ1hjcdGCe9jX6RriGll2X3ndd_9lJUNw_QSgd0ml28J4F1i-a0aR53-KHG-OYNr3KgYx_dz0Z1SypljXbrg1NTKjzmDk-YxDH69bS5JMPCSQUgMdCxJ9lV9jI7VHK'
-const IMG_COLOMBIA = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqZdMom4JQKxg9s0-R9VfCfc77bgoB1u9whpTGTGHfL3X7-G0x0gf-prlXT3jd5Xe80J9AS0K5a1U6lYZh35dFY29-nHTiQM0OYITxVdKppDWohNfUkCgkkXFVX3HgAxQvKnU68Wbugtwr7WV6_0m6Lry1pYuZDaT2TeN-uZ15yT36iEo0uCDf3xgRFcYoNhOPWNzbf7wle5HMA7oRCUTI06215qZCN4_YUoMvwnPNBNiOLrAzDhWqUt-pXHISTlsjkYf2iTbS_SpP'
-const IMG_ORIGIN = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDv_y3FZun3fmJNJtBriQ4ifdPXeDNGL_fIZY3PtZ8ZfID9ISYcm0zj1UDbR7CE8jvC2ZzvJV5DWjWOOqJapCXLa9QcJJbjY-HCkXwj6xlJTCuLBgU-zpitjKYmhsp59SQHCjdQLArmkPko3__2jECToXMU3y9gOr4UCyBMFGTfeLkT4xANgbzDR0fC5Amk-tZaIouW98wYGbCQSIyFZNaihqPPKi1IEmhQcMcdNtGRg3GKhHXUqIAALQkwx3MEOn05Elwr_2Dg2HM7'
-
 const varietals = [
   {
     id: 'terroir',
@@ -17,7 +13,7 @@ const varietals = [
     origin: 'Brasil',
     process: 'Natural',
     notes: 'Chocolate · Ácido Cítrico',
-    image: IMG_BRASIL,
+    image: '/pdf/terroir.jpg',
     active: true,
     profile: {
       roast: 'Medio',
@@ -25,7 +21,7 @@ const varietals = [
       description: 'Chocolate, azúcar mascabo, ácido cítrico y crema. Ácido, herbal y acaramelado.',
       origin: 'Águas Paulistas, Brasil',
       originStory: 'Fincas selectas a 700–1.100 msnm. Varietales Catuaí Amarelo y Mundo Novo.',
-      originImage: IMG_ORIGIN,
+      originImage: '/pdf/terroir.jpg',
     },
   },
   {
@@ -34,15 +30,15 @@ const varietals = [
     origin: 'Brasil',
     process: 'Natural',
     notes: 'Arándanos · Jarabe de Arce',
-    image: IMG_BRASIL,
+    image: '/pdf/berry-bliss.jpg',
     active: false,
     profile: {
       roast: 'Medio-Ligero',
       process: 'Natural',
       description: 'Arándanos, jarabe de arce, azúcar mascabo y crema. Balanceado, cremoso y dulce.',
-      origin: 'Alta Mogiana, Paraná',
+      origin: 'Alta Mogiana, Brasil',
       originStory: 'Varietal Obatá cultivado a 700–1.100 msnm en la región de Alta Mogiana.',
-      originImage: IMG_ORIGIN,
+      originImage: '/pdf/berry-bliss.jpg',
     },
   },
   {
@@ -51,7 +47,7 @@ const varietals = [
     origin: 'Colombia',
     process: 'Lavado',
     notes: 'Frutos Rojos · Caramelo',
-    image: IMG_COLOMBIA,
+    image: '/pdf/san-agustin.jpg',
     active: false,
     profile: {
       roast: 'Medio',
@@ -59,7 +55,7 @@ const varietals = [
       description: 'Frutos rojos, caramelo y chocolate negro. Cuerpo sedoso y aroma intenso.',
       origin: 'Huila, Colombia',
       originStory: 'Finca San Agustín a 1.700 msnm en el departamento del Huila.',
-      originImage: IMG_ORIGIN,
+      originImage: '/pdf/san-agustin.jpg',
     },
   },
 ]
@@ -97,6 +93,7 @@ export default function RatingPage() {
   const [notes, setNotes] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [lightbox, setLightbox] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [liveCount, setLiveCount] = useState<number | null>(null)
   const [communityResults, setCommunityResults] = useState<{ count: number; averages: Averages } | null>(null)
@@ -200,7 +197,10 @@ export default function RatingPage() {
                   selectedVarietal === i ? 'border-primary/40' : 'opacity-70'
                 }`}
               >
-                <div className="aspect-[4/3] rounded-lg overflow-hidden relative">
+                <div
+                  className="aspect-[4/3] rounded-lg overflow-hidden relative cursor-zoom-in"
+                  onClick={(e) => { e.stopPropagation(); setLightbox(v.image) }}
+                >
                   <Image src={v.image} alt={v.name} fill className="object-cover grayscale-[0.3]" />
                   {v.active && (
                     <div className="absolute top-2 right-2 bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
@@ -350,6 +350,24 @@ export default function RatingPage() {
       </main>
 
       <Footer variant="left" />
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
+            onClick={() => setLightbox(null)}
+          >
+            <span className="material-symbols-outlined text-[32px]">close</span>
+          </button>
+          <div className="relative w-full max-w-2xl aspect-[4/3]">
+            <Image src={lightbox} alt="Vista ampliada" fill className="object-contain" />
+          </div>
+        </div>
+      )}
 
       {/* Bottom Mobile Nav */}
       <div className="md:hidden fixed bottom-0 left-0 w-full bg-surface/80 backdrop-blur-xl border-t border-primary/10 flex justify-around items-center h-20 z-50 px-6">

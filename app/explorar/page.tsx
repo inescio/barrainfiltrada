@@ -1,7 +1,13 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import { createClient } from '@supabase/supabase-js'
+
+export const metadata: Metadata = {
+  title: 'Explorar Cafés',
+  description: 'Explorá todos los granos de café de especialidad que pasaron por Barra Infiltrada. Origen, proceso, notas de sabor y ratings de la comunidad.',
+}
 
 type CoffeeWithStats = {
   id: string
