@@ -2,17 +2,17 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://barrainfiltrada.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://barraIn-filtrada.com'
 const gaId = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Barra Infiltrada — Café de Especialidad',
-    template: '%s | Barra Infiltrada',
+    default: 'Barra In-filtrada — Café de Especialidad',
+    template: '%s | Barra In-filtrada',
   },
   description: 'Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente. Calificá el grano, explorá las crónicas.',
-  keywords: ['café de especialidad', 'specialty coffee', 'barra infiltrada', 'be coffee', 'café argentina', 'coffee tasting', 'café pop-up', 'V60', 'chemex'],
+  keywords: ['café de especialidad', 'specialty coffee', 'barra In-filtrada', 'be coffee', 'café argentina', 'coffee tasting', 'café pop-up', 'V60', 'chemex'],
   authors: [{ name: 'Be Coffee' }],
   creator: 'Be Coffee',
   robots: { index: true, follow: true },
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_AR',
     url: siteUrl,
-    siteName: 'Barra Infiltrada',
-    title: 'Barra Infiltrada — Café de Especialidad',
+    siteName: 'Barra In-filtrada',
+    title: 'Barra In-filtrada — Café de Especialidad',
     description: 'Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente.',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Barra Infiltrada — Café de Especialidad' }],
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Barra In-filtrada — Café de Especialidad' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Barra Infiltrada — Café de Especialidad',
+    title: 'Barra In-filtrada — Café de Especialidad',
     description: 'Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente.',
     images: ['/opengraph-image'],
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

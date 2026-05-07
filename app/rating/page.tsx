@@ -87,6 +87,7 @@ type Averages = {
 
 export default function RatingPage() {
   const [selectedVarietal, setSelectedVarietal] = useState<number | null>(null)
+  const [submittedVarietals, setSubmittedVarietals] = useState<Set<number>>(new Set())
   const [generalRating, setGeneralRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(0)
   const [attributes, setAttributes] = useState<Record<AttributeKey, number>>({
@@ -98,12 +99,14 @@ export default function RatingPage() {
   })
   const [notes, setNotes] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
   const [lightbox, setLightbox] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [liveCount, setLiveCount] = useState<number | null>(null)
   const [communityResults, setCommunityResults] = useState<{ count: number; averages: Averages } | null>(null)
   const formRef = useRef<HTMLDivElement>(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  const allSubmitted = submittedVarietals.size === varietals.length
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -112,7 +115,7 @@ export default function RatingPage() {
         const data = await res.json()
         setLiveCount(data.count)
       } catch {
-        // silently fail, keep null
+        // silently fail
       }
     }
     fetchCount()
@@ -123,10 +126,19 @@ export default function RatingPage() {
   const currentVarietal = selectedVarietal !== null ? varietals[selectedVarietal] : null
 
   const handleSelectVarietal = (i: number) => {
+    if (submittedVarietals.has(i)) return
     setSelectedVarietal(i)
     setTimeout(() => {
       formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
+  }
+
+  const resetForm = () => {
+    setGeneralRating(0)
+    setHoverRating(0)
+    setAttributes({ aroma: 0, acidity: 0, sweetness: 0, body: 0, aftertaste: 0 })
+    setNotes('')
+    setError('')
   }
 
   const handleBarClick = (key: AttributeKey, e: React.MouseEvent<HTMLDivElement>) => {
@@ -166,21 +178,31 @@ export default function RatingPage() {
       })
 
       const data = await res.json()
-      if (!res.ok) {
-        throw new Error(data.error || 'Error al enviar')
+      if (!res.ok) throw new Error(data.error || 'Error al enviar')
+
+      const newSubmitted = new Set(submittedVarietals)
+      newSubmitted.add(selectedVarietal)
+      setSubmittedVarietals(newSubmitted)
+
+      const isLast = newSubmitted.size === varietals.length
+
+      if (isLast) {
+        try {
+          const resultsRes = await fetch('/api/results')
+          if (resultsRes.ok) {
+            const resultsData = await resultsRes.json()
+            if (resultsData.averages) setCommunityResults(resultsData)
+          }
+        } catch { /* silently fail */ }
       }
 
-      setSubmitted(true)
+      resetForm()
+      setSelectedVarietal(null)
 
-      // Soft fetch community results after submission
-      try {
-        const resultsRes = await fetch('/api/results')
-        if (resultsRes.ok) {
-          const resultsData = await resultsRes.json()
-          if (resultsData.averages) setCommunityResults(resultsData)
-        }
-      } catch (resultsErr) {
-        console.warn('Could not fetch community results:', resultsErr)
+      if (!isLast) {
+        setTimeout(() => {
+          carouselRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Error al enviar tu calificación'
@@ -207,8 +229,27 @@ export default function RatingPage() {
           </div>
         </header>
 
+        {/* Progress */}
+        {submittedVarietals.size > 0 && !allSubmitted && (
+          <div className="glass-card rounded-xl px-6 py-4 flex items-center gap-4">
+            <div className="flex gap-2">
+              {varietals.map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    submittedVarietals.has(i) ? 'bg-primary' : 'bg-surface-container-highest'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="font-label-caps text-label-caps text-on-surface-variant">
+              {submittedVarietals.size} de {varietals.length} cafés calificados — seleccioná el siguiente
+            </span>
+          </div>
+        )}
+
         {/* Varietal Selection */}
-        <section className="space-y-6">
+        <section ref={carouselRef} className="space-y-6 scroll-mt-24">
           <div className="space-y-1">
             <h2 className="font-headline-sm text-headline-sm text-on-surface">¿Qué café tomaste?</h2>
             <p className="font-body-md text-on-surface-variant text-sm">Tocá el café que querés calificar</p>
@@ -216,16 +257,19 @@ export default function RatingPage() {
           <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6">
             {varietals.map((v, i) => {
               const isSelected = selectedVarietal === i
+              const isDone = submittedVarietals.has(i)
               return (
                 <div
                   key={v.id}
                   onClick={() => handleSelectVarietal(i)}
-                  className={`min-w-[260px] glass-card rounded-xl p-4 space-y-4 cursor-pointer transition-all duration-200 ${
-                    isSelected
-                      ? 'ring-2 ring-primary scale-[1.02] opacity-100'
+                  className={`min-w-[260px] glass-card rounded-xl p-4 space-y-4 transition-all duration-200 ${
+                    isDone
+                      ? 'opacity-40 cursor-default'
+                      : isSelected
+                      ? 'ring-2 ring-primary scale-[1.02] opacity-100 cursor-pointer'
                       : selectedVarietal !== null
-                      ? 'opacity-40 hover:opacity-60'
-                      : 'opacity-80 hover:opacity-100'
+                      ? 'opacity-60 hover:opacity-80 cursor-pointer'
+                      : 'opacity-80 hover:opacity-100 cursor-pointer'
                   }`}
                 >
                   <div
@@ -234,14 +278,19 @@ export default function RatingPage() {
                   >
                     <Image src={v.image} alt={v.name} fill className="object-cover grayscale-[0.3]" />
                     <div className="absolute top-2 right-2 flex gap-1">
-                      {v.active && (
+                      {v.active && !isDone && (
                         <div className="bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
                           ACTIVO
                         </div>
                       )}
-                      {isSelected && (
+                      {isDone && (
                         <div className="bg-primary text-on-primary w-7 h-7 rounded-full flex items-center justify-center shadow-lg">
                           <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+                        </div>
+                      )}
+                      {isSelected && !isDone && (
+                        <div className="bg-primary text-on-primary w-7 h-7 rounded-full flex items-center justify-center shadow-lg">
+                          <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>coffee</span>
                         </div>
                       )}
                     </div>
@@ -251,12 +300,21 @@ export default function RatingPage() {
                     <p className="font-body-md text-on-surface-variant text-sm">{v.origin} • {v.process}</p>
                     <p className="font-body-md text-primary/70 text-xs">{v.notes}</p>
                   </div>
-                  {isSelected && (
-                    <div className="flex items-center gap-1 text-primary text-xs font-label-caps tracking-wider pt-1 border-t border-primary/20">
-                      <span className="material-symbols-outlined text-[14px]">arrow_downward</span>
-                      Calificá abajo
-                    </div>
-                  )}
+                  <div className={`flex items-center gap-1 text-xs font-label-caps tracking-wider pt-1 border-t border-primary/20 ${
+                    isDone ? 'text-on-surface-variant' : isSelected ? 'text-primary' : 'text-transparent'
+                  }`}>
+                    {isDone ? (
+                      <>
+                        <span className="material-symbols-outlined text-[14px]">check_circle</span>
+                        Calificado
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-[14px]">arrow_downward</span>
+                        Calificá abajo
+                      </>
+                    )}
+                  </div>
                 </div>
               )
             })}
@@ -307,6 +365,10 @@ export default function RatingPage() {
 
         {/* Rating Form / Results */}
         <section ref={formRef} className="space-y-8 scroll-mt-24">
+          {allSubmitted ? (
+            <Results communityResults={communityResults} />
+          ) : (
+          <>
           <div className="space-y-2">
             <h2 className="font-display-md text-[32px] text-on-surface">Calificá tu Ritual</h2>
             {currentVarietal ? (
@@ -315,17 +377,11 @@ export default function RatingPage() {
                 <p className="font-body-md text-primary font-semibold">{currentVarietal.name}</p>
               </div>
             ) : (
-              <p className="font-body-md text-on-surface-variant">↑ Primero seleccioná un café arriba</p>
+              <p className="font-body-md text-on-surface-variant">↑ Seleccioná un café arriba para calificar</p>
             )}
           </div>
 
-          {submitted ? (
-            <Results
-              myRating={generalRating}
-              myAttributes={attributes}
-              communityResults={communityResults}
-            />
-          ) : (
+          {currentVarietal && (
             <form onSubmit={handleSubmit} className="space-y-10">
               {/* General Rating */}
               <div className="space-y-4">
@@ -399,9 +455,11 @@ export default function RatingPage() {
                 disabled={submitting}
                 className="w-full bg-primary text-on-primary font-label-caps text-[14px] tracking-[0.2em] py-5 rounded-lg font-bold shadow-lg shadow-primary/10 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {submitting ? 'ENVIANDO...' : 'ENVIAR MI CALIFICACIÓN'}
+                {submitting ? 'ENVIANDO...' : submittedVarietals.size === varietals.length - 1 ? 'ENVIAR Y VER RESULTADOS' : 'ENVIAR Y CALIFICAR SIGUIENTE'}
               </button>
             </form>
+          )}
+          </>
           )}
         </section>
 
@@ -469,12 +527,8 @@ export default function RatingPage() {
 }
 
 function Results({
-  myRating,
-  myAttributes,
   communityResults,
 }: {
-  myRating: number
-  myAttributes: Record<AttributeKey, number>
   communityResults: { count: number; averages: Averages } | null
 }) {
   const attributeLabels = [
@@ -487,7 +541,6 @@ function Results({
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div className="glass-card rounded-xl p-8 text-center space-y-4">
         <span
           className="material-symbols-outlined text-primary text-[56px] block"
@@ -495,75 +548,38 @@ function Results({
         >
           check_circle
         </span>
-        <h3 className="font-headline-sm text-[28px] text-on-surface">¡Gracias!</h3>
+        <h3 className="font-headline-sm text-[28px] text-on-surface">¡Calificaste los 3 cafés!</h3>
         <p className="font-body-md text-on-surface-variant">
-          Tu calificación fue registrada.
-          {communityResults && (
-            <> Ya son <span className="text-primary font-bold">{communityResults.count}</span> personas que cataron hoy.</>
-          )}
+          {communityResults
+            ? <>Ya son <span className="text-primary font-bold">{communityResults.count}</span> personas que cataron hoy.</>
+            : 'Tus calificaciones fueron registradas.'}
         </p>
       </div>
 
-      {/* Comparison */}
       {communityResults?.averages && (
-        <div className="space-y-6">
-          <div className="flex items-center gap-3">
-            <h4 className="font-label-caps text-label-caps text-primary tracking-[0.2em]">TU CATA VS. EL GRUPO</h4>
-          </div>
-
-          {/* General rating comparison */}
-          <div className="glass-card rounded-xl p-6 space-y-4">
-            <div className="flex justify-between items-center pb-4 border-b border-primary/10">
-              <span className="font-body-md text-on-surface">Impresión general</span>
-              <div className="flex items-center gap-4 text-sm font-label-caps">
-                <span className="text-on-surface-variant">
-                  Grupo: <span className="text-secondary">{communityResults.averages.general_rating}/5</span>
-                </span>
-                <span className="text-primary">Vos: {myRating}/5</span>
-              </div>
-            </div>
-
-            {attributeLabels.map(({ key, label }) => {
-              const mine = myAttributes[key]
-              const avg = communityResults.averages[key]
-              if (mine === 0) return null
+        <div className="space-y-4">
+          <h4 className="font-label-caps text-label-caps text-primary tracking-[0.2em]">PROMEDIOS DEL GRUPO</h4>
+          <div className="glass-card rounded-xl p-6 space-y-5">
+            {[
+              { key: 'general_rating', label: 'Impresión general' },
+              ...attributeLabels.map(a => ({ key: a.key, label: a.label })),
+            ].map(({ key, label }) => {
+              const avg = communityResults.averages[key as keyof Averages]
               return (
                 <div key={key} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="font-body-md text-on-surface">{label}</span>
-                    <div className="flex items-center gap-4 text-sm font-label-caps">
-                      <span className="text-on-surface-variant">
-                        Grupo: <span className="text-secondary">{avg}/5</span>
-                      </span>
-                      <span className="text-primary">Vos: {mine}/5</span>
-                    </div>
+                    <span className="text-primary font-bold font-label-caps">{avg}/5</span>
                   </div>
-                  <div className="relative h-[6px] w-full bg-surface-container-highest rounded-full overflow-hidden">
-                    {/* Community average */}
+                  <div className="h-[6px] w-full bg-surface-container-highest rounded-full overflow-hidden">
                     <div
-                      className="absolute h-full bg-secondary/40 rounded-full"
+                      className="h-full bg-primary rounded-full"
                       style={{ width: `${(avg / 5) * 100}%` }}
-                    />
-                    {/* My rating */}
-                    <div
-                      className="absolute h-full bg-primary rounded-full"
-                      style={{ width: `${(mine / 5) * 100}%` }}
                     />
                   </div>
                 </div>
               )
             })}
-
-            <div className="flex items-center gap-4 pt-2">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-[3px] bg-primary rounded-full" />
-                <span className="font-label-caps text-[10px] text-on-surface-variant">Tu calificación</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-[3px] bg-secondary/40 rounded-full" />
-                <span className="font-label-caps text-[10px] text-on-surface-variant">Promedio del grupo</span>
-              </div>
-            </div>
           </div>
         </div>
       )}

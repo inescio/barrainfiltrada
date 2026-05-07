@@ -6,7 +6,7 @@ import { createClient } from '@supabase/supabase-js'
 
 export const metadata: Metadata = {
   title: 'Explorar Cafés',
-  description: 'Explorá todos los granos de café de especialidad que pasaron por Barra Infiltrada. Origen, proceso, notas de sabor y ratings de la comunidad.',
+  description: 'Explorá todos los granos de café de especialidad que pasaron por Barra In-filtrada. Origen, proceso, notas de sabor y ratings de la comunidad.',
 }
 
 type CoffeeWithStats = {

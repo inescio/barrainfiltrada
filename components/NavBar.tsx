@@ -27,11 +27,11 @@ export default function NavBar({ showBack = false, showMenu = false }: NavBarPro
       <div className="flex justify-between items-center h-20 px-6 max-w-container-max mx-auto">
         {showBack ? (
           <Link href="/" className="font-headline-sm text-[32px] leading-[1.3] text-on-surface tracking-tight">
-            Barra Infiltrada
+            Barra In-filtrada
           </Link>
         ) : (
           <span className="font-headline-sm text-[24px] md:text-headline-sm text-on-surface tracking-tight font-bold">
-            Barra Infiltrada by Be Coffee
+            Barra In-filtrada by Be Coffee
           </span>
         )}
         <div className="flex items-center gap-4">

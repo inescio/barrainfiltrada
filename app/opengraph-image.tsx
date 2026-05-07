@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Barra Infiltrada — Café de Especialidad'
+export const alt = 'Barra In-filtrada — Café de Especialidad'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -73,7 +73,7 @@ export default function Image() {
               letterSpacing: '-2px',
             }}
           >
-            Infiltrada
+            In-filtrada
           </div>
         </div>
 

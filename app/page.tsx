@@ -20,32 +20,32 @@ export default function Home() {
                 <pattern id="coffee-beans" x="0" y="0" width="110" height="110" patternUnits="userSpaceOnUse">
                   {/* Bean A */}
                   <g transform="translate(22,20) rotate(-30)">
-                    <ellipse cx="0" cy="0" rx="9" ry="14" fill="none" stroke="#7a5c2e" strokeWidth="1.3"/>
-                    <path d="M0,-12 C-4,-5 4,5 0,12" fill="none" stroke="#7a5c2e" strokeWidth="1"/>
+                    <ellipse cx="0" cy="0" rx="9" ry="14" fill="none" stroke="#7a5c2e" strokeWidth="1.3" />
+                    <path d="M0,-12 C-4,-5 4,5 0,12" fill="none" stroke="#7a5c2e" strokeWidth="1" />
                   </g>
                   {/* Bean B */}
                   <g transform="translate(78,75) rotate(20)">
-                    <ellipse cx="0" cy="0" rx="10" ry="15" fill="none" stroke="#7a5c2e" strokeWidth="1.3"/>
-                    <path d="M0,-13 C-4,-5 4,5 0,13" fill="none" stroke="#7a5c2e" strokeWidth="1"/>
+                    <ellipse cx="0" cy="0" rx="10" ry="15" fill="none" stroke="#7a5c2e" strokeWidth="1.3" />
+                    <path d="M0,-13 C-4,-5 4,5 0,13" fill="none" stroke="#7a5c2e" strokeWidth="1" />
                   </g>
                   {/* Bean C */}
                   <g transform="translate(88,20) rotate(50)">
-                    <ellipse cx="0" cy="0" rx="7" ry="11" fill="none" stroke="#7a5c2e" strokeWidth="1"/>
-                    <path d="M0,-9 C-3,-4 3,4 0,9" fill="none" stroke="#7a5c2e" strokeWidth="0.8"/>
+                    <ellipse cx="0" cy="0" rx="7" ry="11" fill="none" stroke="#7a5c2e" strokeWidth="1" />
+                    <path d="M0,-9 C-3,-4 3,4 0,9" fill="none" stroke="#7a5c2e" strokeWidth="0.8" />
                   </g>
                   {/* Bean D */}
                   <g transform="translate(20,88) rotate(-15)">
-                    <ellipse cx="0" cy="0" rx="7" ry="11" fill="none" stroke="#7a5c2e" strokeWidth="1"/>
-                    <path d="M0,-9 C-3,-4 3,4 0,9" fill="none" stroke="#7a5c2e" strokeWidth="0.8"/>
+                    <ellipse cx="0" cy="0" rx="7" ry="11" fill="none" stroke="#7a5c2e" strokeWidth="1" />
+                    <path d="M0,-9 C-3,-4 3,4 0,9" fill="none" stroke="#7a5c2e" strokeWidth="0.8" />
                   </g>
                   {/* Bean E (tiny accent) */}
                   <g transform="translate(55,42) rotate(70)">
-                    <ellipse cx="0" cy="0" rx="5" ry="8" fill="none" stroke="#7a5c2e" strokeWidth="0.8"/>
-                    <path d="M0,-6 C-2,-2 2,2 0,6" fill="none" stroke="#7a5c2e" strokeWidth="0.6"/>
+                    <ellipse cx="0" cy="0" rx="5" ry="8" fill="none" stroke="#7a5c2e" strokeWidth="0.8" />
+                    <path d="M0,-6 C-2,-2 2,2 0,6" fill="none" stroke="#7a5c2e" strokeWidth="0.6" />
                   </g>
                 </pattern>
               </defs>
-              <rect width="100%" height="100%" fill="url(#coffee-beans)"/>
+              <rect width="100%" height="100%" fill="url(#coffee-beans)" />
             </svg>
           </div>
 
@@ -62,7 +62,7 @@ export default function Home() {
               Experiencia de degustación
             </div>
             <h1 className="font-display-lg text-[56px] leading-[1] mb-6 text-on-surface dark:drop-shadow-[0_2px_24px_rgba(242,195,107,0.18)]">
-              Barra <span className="italic text-primary font-light">Infiltrada</span>
+              Barra <span className="italic text-primary font-light">In-filtrada</span>
             </h1>
             <p className="font-body-lg text-on-surface-variant max-w-[320px] mx-auto mb-12">
               Café de especialidad en espacios que no esperás. Cada edición, un lugar diferente.
@@ -93,7 +93,7 @@ export default function Home() {
             <div className="mb-1">
               <span className="font-label-caps text-[14px] uppercase tracking-[0.5em] text-on-surface-variant">Barra</span>
             </div>
-            <h2 className="font-display-lg text-[54px] leading-none italic text-primary">Infiltrada</h2>
+            <h2 className="font-display-lg text-[54px] leading-none italic text-primary">In-filtrada</h2>
             <div className="mt-4 h-px bg-primary/20 mx-auto w-12"></div>
             <p className="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-[0.35em] mt-4">by Be Coffee</p>
             <p className="font-body-md text-on-surface-variant text-[14px] leading-relaxed mt-6 max-w-[280px] mx-auto">
@@ -121,7 +121,7 @@ export default function Home() {
               <div className="flex items-end justify-between mb-6">
                 <div>
                   <p className="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">Sede</p>
-                  <h3 className="font-display-lg text-[44px] leading-[1.05] italic">Café<br/>Literario</h3>
+                  <h3 className="font-display-lg text-[44px] leading-[1.05] italic">Café<br />Literario</h3>
                 </div>
                 <div className="w-14 h-14 rounded-2xl border border-primary/25 bg-primary/8 flex items-center justify-center shrink-0 mb-1">
                   <span className="material-symbols-outlined text-primary text-2xl">menu_book</span>
