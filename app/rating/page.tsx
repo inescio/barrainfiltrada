@@ -126,7 +126,6 @@ export default function RatingPage() {
   const currentVarietal = selectedVarietal !== null ? varietals[selectedVarietal] : null
 
   const handleSelectVarietal = (i: number) => {
-    if (submittedVarietals.has(i)) return
     setSelectedVarietal(i)
     setTimeout(() => {
       formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -263,9 +262,7 @@ export default function RatingPage() {
                   key={v.id}
                   onClick={() => handleSelectVarietal(i)}
                   className={`min-w-[260px] glass-card rounded-xl p-4 space-y-4 transition-all duration-200 ${
-                    isDone
-                      ? 'opacity-40 cursor-default'
-                      : isSelected
+                    isSelected
                       ? 'ring-2 ring-primary scale-[1.02] opacity-100 cursor-pointer'
                       : selectedVarietal !== null
                       ? 'opacity-60 hover:opacity-80 cursor-pointer'
