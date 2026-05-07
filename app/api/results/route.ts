@@ -2,16 +2,25 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
 export async function GET() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    return NextResponse.json({ count: 0, averages: null, error: 'Supabase not configured' })
+  }
+
   try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-    )
+    const supabase = createClient(supabaseUrl, supabaseKey)
     const today = new Date().toISOString().split('T')[0]
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('ratings')
       .select('general_rating, aroma, acidity, sweetness, body, aftertaste')
       .gte('created_at', `${today}T00:00:00.000Z`)
+
+    if (error) {
+      console.error('Results API Supabase error:', error)
+      return NextResponse.json({ count: 0, averages: null, error: error.message })
+    }
 
     if (!data || data.length === 0) {
       return NextResponse.json({ count: 0, averages: null })
@@ -31,7 +40,8 @@ export async function GET() {
         aftertaste: avg('aftertaste'),
       },
     })
-  } catch {
+  } catch (err) {
+    console.error('Results API processing error:', err)
     return NextResponse.json({ count: 0, averages: null })
   }
 }

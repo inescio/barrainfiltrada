@@ -153,16 +153,23 @@ export default function RatingPage() {
         }),
       })
 
+      const data = await res.json()
       if (!res.ok) {
-        const data = await res.json()
         throw new Error(data.error || 'Error al enviar')
       }
 
-      const resultsRes = await fetch('/api/results')
-      const resultsData = await resultsRes.json()
-      if (resultsData.averages) setCommunityResults(resultsData)
-
       setSubmitted(true)
+
+      // Soft fetch community results after submission
+      try {
+        const resultsRes = await fetch('/api/results')
+        if (resultsRes.ok) {
+          const resultsData = await resultsRes.json()
+          if (resultsData.averages) setCommunityResults(resultsData)
+        }
+      } catch (resultsErr) {
+        console.warn('Could not fetch community results:', resultsErr)
+      }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Error al enviar tu calificación'
       setError(message)

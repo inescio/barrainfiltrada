@@ -675,18 +675,47 @@ function setAttr(attr, val) {
 // ============================================================
 // SUBMIT
 // ============================================================
-function submitRating(e) {
+async function submitRating(e) {
   e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const originalHtml = btn.innerHTML;
+  
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> ENVIANDO...';
+
   const payload = {
-    varietal: varietals[currentVarietal].name,
-    generalRating: currentStars,
-    attributes: { ...attrValues },
+    coffee_id: null, // Static version doesn't handle coffee UUIDs yet
+    general_rating: currentStars,
+    aroma: attrValues.aroma,
+    acidity: attrValues.acidez,
+    sweetness: attrValues.dulzura,
+    body: attrValues.cuerpo,
+    aftertaste: attrValues.retrogusto,
     notes: document.getElementById('notes-field').value,
-    timestamp: new Date().toISOString()
   };
-  console.log('Rating submitted:', payload);
-  showToast('¡Ritual enviado! Gracias por tu cata.');
-  setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 600);
+
+  try {
+    const res = await fetch('/api/ratings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Error en el servidor');
+    }
+
+    showToast('¡Ritual enviado! Gracias por tu cata.');
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 600);
+    // Optional: redirect or show results
+  } catch (err) {
+    console.error('Error submitting rating:', err);
+    showToast(`ERROR: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalHtml;
+  }
 }
 
 // ============================================================
