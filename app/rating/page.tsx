@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import NavBar from '@/components/NavBar'
@@ -86,7 +86,7 @@ type Averages = {
 }
 
 export default function RatingPage() {
-  const [selectedVarietal, setSelectedVarietal] = useState(0)
+  const [selectedVarietal, setSelectedVarietal] = useState<number | null>(null)
   const [generalRating, setGeneralRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(0)
   const [attributes, setAttributes] = useState<Record<AttributeKey, number>>({
@@ -103,6 +103,7 @@ export default function RatingPage() {
   const [error, setError] = useState('')
   const [liveCount, setLiveCount] = useState<number | null>(null)
   const [communityResults, setCommunityResults] = useState<{ count: number; averages: Averages } | null>(null)
+  const formRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -119,7 +120,14 @@ export default function RatingPage() {
     return () => clearInterval(interval)
   }, [])
 
-  const currentVarietal = varietals[selectedVarietal]
+  const currentVarietal = selectedVarietal !== null ? varietals[selectedVarietal] : null
+
+  const handleSelectVarietal = (i: number) => {
+    setSelectedVarietal(i)
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
 
   const handleBarClick = (key: AttributeKey, e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -130,6 +138,10 @@ export default function RatingPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (selectedVarietal === null) {
+      setError('Seleccioná un café primero.')
+      return
+    }
     if (generalRating === 0) {
       setError('Seleccioná al menos una estrella.')
       return
@@ -197,84 +209,114 @@ export default function RatingPage() {
 
         {/* Varietal Selection */}
         <section className="space-y-6">
-          <div className="flex justify-between items-end">
-            <h2 className="font-headline-sm text-headline-sm text-on-surface">Seleccioná tu Varietal</h2>
-            <span className="font-label-caps text-label-caps text-primary">VER TODO</span>
+          <div className="space-y-1">
+            <h2 className="font-headline-sm text-headline-sm text-on-surface">¿Qué café tomaste?</h2>
+            <p className="font-body-md text-on-surface-variant text-sm">Tocá el café que querés calificar</p>
           </div>
           <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6">
-            {varietals.map((v, i) => (
-              <div
-                key={v.id}
-                onClick={() => setSelectedVarietal(i)}
-                className={`min-w-[280px] glass-card rounded-xl p-4 space-y-4 cursor-pointer transition-all ${
-                  selectedVarietal === i ? 'border-primary/40' : 'opacity-70'
-                }`}
-              >
+            {varietals.map((v, i) => {
+              const isSelected = selectedVarietal === i
+              return (
                 <div
-                  className="aspect-[4/3] rounded-lg overflow-hidden relative cursor-zoom-in"
-                  onClick={(e) => { e.stopPropagation(); setLightbox(v.image) }}
+                  key={v.id}
+                  onClick={() => handleSelectVarietal(i)}
+                  className={`min-w-[260px] glass-card rounded-xl p-4 space-y-4 cursor-pointer transition-all duration-200 ${
+                    isSelected
+                      ? 'ring-2 ring-primary scale-[1.02] opacity-100'
+                      : selectedVarietal !== null
+                      ? 'opacity-40 hover:opacity-60'
+                      : 'opacity-80 hover:opacity-100'
+                  }`}
                 >
-                  <Image src={v.image} alt={v.name} fill className="object-cover grayscale-[0.3]" />
-                  {v.active && (
-                    <div className="absolute top-2 right-2 bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
-                      ACTIVO
+                  <div
+                    className="aspect-[4/3] rounded-lg overflow-hidden relative cursor-zoom-in"
+                    onClick={(e) => { e.stopPropagation(); setLightbox(v.image) }}
+                  >
+                    <Image src={v.image} alt={v.name} fill className="object-cover grayscale-[0.3]" />
+                    <div className="absolute top-2 right-2 flex gap-1">
+                      {v.active && (
+                        <div className="bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
+                          ACTIVO
+                        </div>
+                      )}
+                      {isSelected && (
+                        <div className="bg-primary text-on-primary w-7 h-7 rounded-full flex items-center justify-center shadow-lg">
+                          <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-headline-sm text-[22px] text-on-surface">{v.name}</h3>
+                    <p className="font-body-md text-on-surface-variant text-sm">{v.origin} • {v.process}</p>
+                    <p className="font-body-md text-primary/70 text-xs">{v.notes}</p>
+                  </div>
+                  {isSelected && (
+                    <div className="flex items-center gap-1 text-primary text-xs font-label-caps tracking-wider pt-1 border-t border-primary/20">
+                      <span className="material-symbols-outlined text-[14px]">arrow_downward</span>
+                      Calificá abajo
                     </div>
                   )}
                 </div>
-                <div>
-                  <h3 className="font-headline-sm text-[24px] text-on-surface">{v.name}</h3>
-                  <p className="font-body-md text-on-surface-variant text-sm">{v.origin} • {v.process} • {v.notes}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
 
         {/* Descriptor de Perfil */}
-        <section className="glass-card rounded-xl p-8 space-y-6">
-          <h3 className="font-headline-sm text-[20px] text-on-surface flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>analytics</span>
-            Descriptor de Perfil
-          </h3>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <span className="font-label-caps text-label-caps text-on-surface-variant">TUESTE</span>
-              <p className="font-body-md text-primary">{currentVarietal.profile.roast}</p>
-            </div>
-            <div className="space-y-1">
-              <span className="font-label-caps text-label-caps text-on-surface-variant">PROCESO</span>
-              <p className="font-body-md text-primary">{currentVarietal.profile.process}</p>
-            </div>
-            {currentVarietal.profile.varietal && (
-              <div className="col-span-2 space-y-1">
-                <span className="font-label-caps text-label-caps text-on-surface-variant">VARIETAL</span>
-                <p className="font-body-md text-primary">{currentVarietal.profile.varietal}</p>
+        {currentVarietal && (
+          <section className="glass-card rounded-xl p-8 space-y-6">
+            <h3 className="font-headline-sm text-[20px] text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>analytics</span>
+              Perfil — {currentVarietal.name}
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <span className="font-label-caps text-label-caps text-on-surface-variant">TUESTE</span>
+                <p className="font-body-md text-primary">{currentVarietal.profile.roast}</p>
               </div>
-            )}
-          </div>
-          <div className="space-y-3 pt-4 border-t border-primary/10">
-            <span className="font-label-caps text-label-caps text-on-surface-variant">NOTAS DE CATA</span>
-            <div className="flex flex-wrap gap-2">
-              {currentVarietal.profile.flavorNotes.map((note) => (
-                <span
-                  key={note}
-                  className="bg-surface-container-high text-secondary px-3 py-1.5 rounded-full text-[11px] font-label-caps uppercase"
-                >
-                  {note}
-                </span>
-              ))}
+              <div className="space-y-1">
+                <span className="font-label-caps text-label-caps text-on-surface-variant">PROCESO</span>
+                <p className="font-body-md text-primary">{currentVarietal.profile.process}</p>
+              </div>
+              {currentVarietal.profile.varietal && (
+                <div className="col-span-2 space-y-1">
+                  <span className="font-label-caps text-label-caps text-on-surface-variant">VARIETAL</span>
+                  <p className="font-body-md text-primary">{currentVarietal.profile.varietal}</p>
+                </div>
+              )}
             </div>
-          </div>
-          <div className="pt-2">
-            <p className="font-body-md text-on-surface-variant italic">{currentVarietal.profile.description}</p>
-          </div>
-        </section>
+            <div className="space-y-3 pt-4 border-t border-primary/10">
+              <span className="font-label-caps text-label-caps text-on-surface-variant">NOTAS DE CATA</span>
+              <div className="flex flex-wrap gap-2">
+                {currentVarietal.profile.flavorNotes.map((note) => (
+                  <span
+                    key={note}
+                    className="bg-surface-container-high text-secondary px-3 py-1.5 rounded-full text-[11px] font-label-caps uppercase"
+                  >
+                    {note}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="pt-2">
+              <p className="font-body-md text-on-surface-variant italic">{currentVarietal.profile.description}</p>
+            </div>
+          </section>
+        )}
 
         {/* Rating Form / Results */}
-        <section className="space-y-8">
+        <section ref={formRef} className="space-y-8 scroll-mt-24">
           <div className="space-y-2">
             <h2 className="font-display-md text-[32px] text-on-surface">Calificá tu Ritual</h2>
-            <p className="font-body-md text-on-surface-variant">Calificá cada atributo según lo que percibís en la taza.</p>
+            {currentVarietal ? (
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>coffee</span>
+                <p className="font-body-md text-primary font-semibold">{currentVarietal.name}</p>
+              </div>
+            ) : (
+              <p className="font-body-md text-on-surface-variant">↑ Primero seleccioná un café arriba</p>
+            )}
           </div>
 
           {submitted ? (
@@ -364,20 +406,22 @@ export default function RatingPage() {
         </section>
 
         {/* Origin Capsule */}
-        <section className="relative h-[240px] rounded-xl overflow-hidden glass-card group">
-          <Image
-            src={currentVarietal.profile.originImage}
-            alt={`Paisaje de origen: ${currentVarietal.profile.origin}`}
-            fill
-            className="object-cover opacity-40 grayscale-[0.2]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-          <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-            <span className="font-label-caps text-[10px] text-primary tracking-widest">CÁPSULA DE ORIGEN</span>
-            <h4 className="font-display-md text-[28px] text-on-surface">{currentVarietal.profile.origin}</h4>
-            <p className="font-body-md text-sm text-on-surface-variant line-clamp-2">{currentVarietal.profile.originStory}</p>
-          </div>
-        </section>
+        {currentVarietal && (
+          <section className="relative h-[240px] rounded-xl overflow-hidden glass-card group">
+            <Image
+              src={currentVarietal.profile.originImage}
+              alt={`Paisaje de origen: ${currentVarietal.profile.origin}`}
+              fill
+              className="object-cover opacity-40 grayscale-[0.2]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+            <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+              <span className="font-label-caps text-[10px] text-primary tracking-widest">CÁPSULA DE ORIGEN</span>
+              <h4 className="font-display-md text-[28px] text-on-surface">{currentVarietal.profile.origin}</h4>
+              <p className="font-body-md text-sm text-on-surface-variant line-clamp-2">{currentVarietal.profile.originStory}</p>
+            </div>
+          </section>
+        )}
 
       </main>
 
