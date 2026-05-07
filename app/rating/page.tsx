@@ -18,9 +18,11 @@ const varietals = [
     profile: {
       roast: 'Medio',
       process: 'Natural',
-      description: 'Chocolate, azúcar mascabo, ácido cítrico y crema. Ácido, herbal y acaramelado.',
+      varietal: 'Catuaí Amarelo / Mundo Novo',
+      flavorNotes: ['Chocolate', 'Azúcar Mascabo', 'Ácido Cítrico', 'Crema'],
+      description: 'Ácido, herbal y acaramelado.',
       origin: 'Águas Paulistas, Brasil',
-      originStory: 'Fincas selectas a 700–1.100 msnm. Varietales Catuaí Amarelo y Mundo Novo.',
+      originStory: 'Fincas selectas a 700–1.100 msnm.',
       originImage: '/pdf/terroir.jpg',
     },
   },
@@ -35,9 +37,11 @@ const varietals = [
     profile: {
       roast: 'Medio-Ligero',
       process: 'Natural',
-      description: 'Arándanos, jarabe de arce, azúcar mascabo y crema. Balanceado, cremoso y dulce.',
+      varietal: 'Obatã',
+      flavorNotes: ['Arándanos', 'Jarabe de Arce', 'Azúcar Mascabo', 'Crema'],
+      description: 'Balanceado y cremoso. Suave, dulce y aromático.',
       origin: 'Alta Mogiana, Brasil',
-      originStory: 'Varietal Obatá cultivado a 700–1.100 msnm en la región de Alta Mogiana.',
+      originStory: 'Varietal Obatã a 700–1.100 msnm en la región de Alta Mogiana.',
       originImage: '/pdf/berry-bliss.jpg',
     },
   },
@@ -52,7 +56,9 @@ const varietals = [
     profile: {
       roast: 'Medio',
       process: 'Lavado',
-      description: 'Frutos rojos, caramelo y chocolate negro. Cuerpo sedoso y aroma intenso.',
+      varietal: null,
+      flavorNotes: ['Frutos Rojos', 'Caramelo', 'Chocolate Negro'],
+      description: 'Balanceado y sutil con cuerpo sedoso y aroma bien intenso.',
       origin: 'Huila, Colombia',
       originStory: 'Finca San Agustín a 1.700 msnm en el departamento del Huila.',
       originImage: '/pdf/san-agustin.jpg',
@@ -232,8 +238,27 @@ export default function RatingPage() {
               <span className="font-label-caps text-label-caps text-on-surface-variant">PROCESO</span>
               <p className="font-body-md text-primary">{currentVarietal.profile.process}</p>
             </div>
+            {currentVarietal.profile.varietal && (
+              <div className="col-span-2 space-y-1">
+                <span className="font-label-caps text-label-caps text-on-surface-variant">VARIETAL</span>
+                <p className="font-body-md text-primary">{currentVarietal.profile.varietal}</p>
+              </div>
+            )}
           </div>
-          <div className="pt-4 border-t border-primary/10">
+          <div className="space-y-3 pt-4 border-t border-primary/10">
+            <span className="font-label-caps text-label-caps text-on-surface-variant">NOTAS DE CATA</span>
+            <div className="flex flex-wrap gap-2">
+              {currentVarietal.profile.flavorNotes.map((note) => (
+                <span
+                  key={note}
+                  className="bg-surface-container-high text-secondary px-3 py-1.5 rounded-full text-[11px] font-label-caps uppercase"
+                >
+                  {note}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="pt-2">
             <p className="font-body-md text-on-surface-variant italic">{currentVarietal.profile.description}</p>
           </div>
         </section>
